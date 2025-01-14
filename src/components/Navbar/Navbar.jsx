@@ -26,9 +26,9 @@ const Navbar = () => {
       <Header
         className="flex justify-between items-center py-4 px-6"
         style={{
-          background: "linear-gradient(to right, #3b82f6, #10b981)", // Blue-500 to Green-500
+          // background: "linear-gradient(to right, #3b82f6, #10b981)", 
           color: "white",
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          // boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
         }}
       >
         {/* Logo */}
@@ -62,8 +62,8 @@ const Navbar = () => {
         {/* Join Button */}
         <Button
             href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-abubakkar-js-dev"
-          type="dashed"
-          className="hidden md:block rounded-full text-lg font-semibold bg-orange-400 text-white"
+          // type="dashed"
+          className="hidden md:block rounded-full text-lg font-semibold bg-gradient-to-l from-blue-400 to-green-400 text-white border-none"
         >
           Join As Developer
         </Button>
