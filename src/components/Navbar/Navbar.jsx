@@ -61,9 +61,7 @@ const Navbar = () => {
 
         {/* Join Button */}
         <Button
-        onClick={()=>{
-            window.open('https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-abubakkar-js-dev')
-        }}
+            href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-abubakkar-js-dev"
           type="dashed"
           className="hidden md:block rounded-full text-lg font-semibold bg-orange-400 text-white"
         >
