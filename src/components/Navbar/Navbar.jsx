@@ -24,7 +24,7 @@ const Navbar = () => {
   return (
     <Layout>
       <Header
-        className="flex justify-between items-center py-4 px-6"
+        className="flex justify-between items-center py-6 md:py-8 px-8  md:px-12"
         style={{
           // background: "linear-gradient(to right, #3b82f6, #10b981)", 
           color: "white",
@@ -74,7 +74,7 @@ const Navbar = () => {
           placement="right"
           onClose={closeDrawer}
           open={drawerVisible}
-          bodyStyle={{ padding: 0 }}
+          // body.Style={{ padding: 0 }}
         >
           <Menu
             mode="vertical"

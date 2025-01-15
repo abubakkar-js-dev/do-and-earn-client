@@ -16,13 +16,100 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
+const imgbbApiKey = import.meta.env.VITE_imgbbApiKey;
+const imgbbHostingURL = `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`;
+
+// console.log(imgbbApiKey);
+
 const Register = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const { setUser, createUser, updateUserProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const [form] = Form.useForm();
+
+  const onFinish = async (values) => {
+    // console.log("Success:", values);
+    const { email, name, password, profilePicture, role } = values;
+    // console.log(name, email, password, profilePicture, role);
+    const imgPath = profilePicture[0].originFileObj;
+
+    // img upload on imgbb
+    const res = await axios.post(
+      imgbbHostingURL,
+      { image: imgPath },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    if (res.data.success) {
+      const imgURL = res.data.data.url;
+      console.log(res.data);
+      console.log(imgURL);
+
+      // register user with firebase
+      createUser(email, password)
+        .then((result) => {
+          const user = result.user;
+          setUser(user);
+          console.log(user);
+
+          // update user profile
+          const updatedInfo = { displayName: name, photoURL: imgURL };
+          updateUserProfile(updatedInfo)
+            .then(() => {
+              console.log("Updated Profile Successfully.");
+              setUser({ ...user, ...updatedInfo });
+
+              // save user to the database.
+              const bonousCoin = role === 'worker'? 10 : role === 'buyer'? 50 : 0;
+              const newUser = {
+                name,
+                email,
+                profilePicture: imgURL,
+                role,
+                availableCoin: bonousCoin,
+              };
+
+              console.log('Successfully created new user.',newUser);
+              // save it to  db
+              axiosPublic.post('/users',newUser)
+              .then(res=>{
+                console.log(res);
+                console.log(res.data);
+                if(res.data.insertedId){
+                  form.resetFields();
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Successfully created your account",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                }
+              })
+            })
+            .catch((err) => {
+              const errorCode = err.code;
+              console.log(errorCode);
+            });
+        })
+        .catch((err) => {
+          const errorCode = err.code;
+          console.log(errorCode);
+        });
+    } else {
+      console.log(res.data);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -39,7 +126,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-green-50 px-4">
-      <div className="bg-white shadow-2xl rounded-xl overflow-hidden  w-full max-w-2xl">
+      <div className="bg-blue-50 border border-green-300   rounded-xl overflow-hidden  w-full max-w-2xl">
         <div className="p-8">
           <Row justify="center" className="mb-6">
             <Col>
@@ -53,6 +140,7 @@ const Register = () => {
           </Row>
 
           <Form
+            form={form}
             name="registerForm"
             layout="vertical"
             onFinish={onFinish}
@@ -74,7 +162,7 @@ const Register = () => {
                 {
                   pattern: /^[a-zA-Z\s]+$/,
                   message: "Name can only contain letters and spaces",
-                }
+                },
               ]}
             >
               <Input
@@ -146,11 +234,11 @@ const Register = () => {
                   message: "Password must be at least 8 characters long",
                 },
                 {
-                  pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                  message: "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
-
+                  pattern:
+                    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                  message:
+                    "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
                 },
-
               ]}
             >
               <Input.Password
