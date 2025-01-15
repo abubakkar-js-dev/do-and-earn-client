@@ -15,7 +15,7 @@ import {
   MailOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -33,6 +33,7 @@ const Register = () => {
   const { setUser, createUser, updateUserProfile } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const onFinish = async (values) => {
     // console.log("Success:", values);
@@ -95,6 +96,7 @@ const Register = () => {
                     showConfirmButton: false,
                     timer: 1500
                   });
+                  navigate('/dashboard');
                 }
               })
             })

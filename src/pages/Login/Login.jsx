@@ -1,14 +1,34 @@
-import { Form, Input, Button, Typography, Row, Col, Divider } from "antd";
-import { LockOutlined, UserOutlined, GoogleOutlined } from "@ant-design/icons"; // Import Google icon
+import { Form, Input, Button, Typography, Row, Col, Divider, message } from "antd";
+import { LockOutlined, GoogleOutlined, MailOutlined } from "@ant-design/icons"; // Import Google icon
 import Lottie from "react-lottie";
 import animationData from "../../assets/lottifiles/login.json";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const { Title, Text } = Typography;
 
 const Login = () => {
+  const {loginUser,loginWithGoogle} = useAuth();
+
   const onFinish = (values) => {
-    console.log("Success:", values);
+    const {email,password} = values;
+
+    // login user
+    loginUser(email,password)
+    .then(()=>{
+      console.log('Successfully Loged in');
+    })
+    .catch(err=>{
+      const errorCode = err.code;
+      if(errorCode === 'auth/wrong-password'){
+        message.error('Incorrect password. Please try again.')
+      }else if(errorCode === 'auth/user-not-found'){
+        message.error('No user found with this email')
+      }else{
+        message.error('Login failed. Please try again later');
+      }
+    })
+    
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -59,13 +79,18 @@ const Login = () => {
           >
             {/* Username Field */}
             <Form.Item
-              label={<span className="text-gray-700 font-medium">Username</span>}
-              name="username"
-              rules={[{ required: true, message: "Please input your username!" }]}
+              label={
+                <span className="text-gray-700 font-medium">Email</span>
+              }
+              name="email"
+              rules={[
+                { required: true, message: "Please input your email!" },
+                { type: "email", message: "Please enter a valid email!" },
+              ]}
             >
               <Input
-                prefix={<UserOutlined className="text-blue-500" />}
-                placeholder="Enter your username"
+                prefix={<MailOutlined className="text-blue-500" />}
+                placeholder="Enter your email"
                 size="large"
                 className="rounded-lg"
               />
@@ -73,9 +98,14 @@ const Login = () => {
 
             {/* Password Field */}
             <Form.Item
-              label={<span className="text-gray-700 font-medium">Password</span>}
+              label={
+                <span className="text-gray-700 font-medium">Password</span>
+              }
               name="password"
-              rules={[{ required: true, message: "Please input your password!" }]}
+              rules={[
+                { required: true, message: "Please input your password!" },
+                { min: 6, message: "Password must be at least 6 characters!" },
+              ]}
             >
               <Input.Password
                 prefix={<LockOutlined className="text-blue-500" />}
