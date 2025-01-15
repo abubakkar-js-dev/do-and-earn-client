@@ -1,34 +1,51 @@
-import { Form, Input, Button, Typography, Row, Col, Divider, message } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Typography,
+  Row,
+  Col,
+  Divider,
+  message,
+} from "antd";
 import { LockOutlined, GoogleOutlined, MailOutlined } from "@ant-design/icons"; // Import Google icon
 import Lottie from "react-lottie";
 import animationData from "../../assets/lottifiles/login.json";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const { Title, Text } = Typography;
 
 const Login = () => {
-  const {loginUser,loginWithGoogle} = useAuth();
+  const { loginUser, loginWithGoogle } = useAuth();
+  const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+
 
   const onFinish = (values) => {
-    const {email,password} = values;
+    const { email, password } = values;
 
     // login user
-    loginUser(email,password)
-    .then(()=>{
-      console.log('Successfully Loged in');
-    })
-    .catch(err=>{
-      const errorCode = err.code;
-      if(errorCode === 'auth/wrong-password'){
-        message.error('Incorrect password. Please try again.')
-      }else if(errorCode === 'auth/user-not-found'){
-        message.error('No user found with this email')
-      }else{
-        message.error('Login failed. Please try again later');
-      }
-    })
-    
+    loginUser(email, password)
+      .then(() => {
+        message.success("Successfully Loged in");
+        form.resetFields();
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err);
+        const errorCode = err.code;
+        console.log(errorCode);
+        if (errorCode === "auth/wrong-password") {
+          message.error("Incorrect password. Please try again.");
+        } else if (errorCode === "auth/user-not-found") {
+          message.error("No user found with this email");
+        } else {
+          message.error(errorCode);
+        }
+      });
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -46,7 +63,32 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     // You can implement your Google login logic here, such as OAuth with Firebase or Google API
-    console.log("Google login clicked!");
+    loginWithGoogle()
+      .then((result) => {
+        const { displayName, email, photoURL, } = result.user;
+
+        // save user data to the db
+        const newUser = {
+          name: displayName,
+          email,
+          profilePicture: photoURL,
+          role: "worker",
+          availableCoin: 0,
+        }
+
+        axiosPublic.post('/users',newUser)
+        .then(res=>{
+          if(res.data.insertedId){
+            message.success("Login with google successfully");
+            navigate('/dashboard');
+          }
+        })
+        
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error("Failed to login with google");
+      });
   };
 
   return (
@@ -71,6 +113,7 @@ const Login = () => {
           </Row>
 
           <Form
+            form={form}
             name="loginForm"
             layout="vertical"
             onFinish={onFinish}
@@ -79,9 +122,7 @@ const Login = () => {
           >
             {/* Username Field */}
             <Form.Item
-              label={
-                <span className="text-gray-700 font-medium">Email</span>
-              }
+              label={<span className="text-gray-700 font-medium">Email</span>}
               name="email"
               rules={[
                 { required: true, message: "Please input your email!" },
