@@ -32,7 +32,7 @@ const DashboardLayout = () => {
       { key: "1", label: <NavLink to="/dashboard">Home</NavLink>, icon: <IoHomeOutline /> },
       { key: "2", label: <NavLink to="/dashboard/add-new-task">Add New Tasks</NavLink>, icon: <TiSocialSkypeOutline /> },
       { key: "3", label: "My Tasks", icon: <TiUserOutline /> },
-      { key: "4", label: "Purchase Coin", icon: <FaCoins /> },
+      { key: "4", label: <NavLink to="/dashboard/purchase-coin">Purchase Coin</NavLink>, icon: <FaCoins /> },
       { key: "5", label: "Payment History", icon: <MdPayments /> },
     ],
     Admin: [
@@ -83,7 +83,7 @@ const DashboardLayout = () => {
             </Badge>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <span>{userRole} | {userName}</span>
+            <span className="hidden md:block">{userRole} | {userName}</span>
             <Avatar icon={<TiUserOutline />} />
             <Badge dot>
               <IoBarbellOutline style={{ fontSize: "24px" }} />

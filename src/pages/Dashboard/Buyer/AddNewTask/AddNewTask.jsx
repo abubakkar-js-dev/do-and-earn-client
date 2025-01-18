@@ -1,26 +1,39 @@
-import { Button, DatePicker, Form, Input, InputNumber, message, Upload } from "antd";
+import {
+  Button,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  message,
+  Upload,
+} from "antd";
 import { FaCloudUploadAlt, FaTasks } from "react-icons/fa";
 import { IoDocumentTextOutline, IoPeopleOutline } from "react-icons/io5";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import useAuth from "../../../../hooks/useAuth";
-import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import useUserData from "../../../../hooks/useUserData";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
+const imgbbApiKey = import.meta.env.VITE_imgbbApiKey;
+const imgbbHostingURL = `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`;
 
 const AddNewTask = () => {
+  const axiosSecure = useAxiosSecure();
   const [form] = Form.useForm();
-  const {user} = useAuth();
+  const { user } = useAuth();
   const email = user?.email;
-  const {userData} = useUserData();
-
+  const { userData,refetch:refetchUserData } = useUserData();
+  const navigate = useNavigate();
 
   // user data from database
 
-  console.log(userData,"from add task");
-  console.log(userData.role)
-  
+  console.log(userData, "from add task");
+  console.log(userData.role);
 
-
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     console.log("Form values:", values);
     const {
       task_title,
@@ -32,13 +45,72 @@ const AddNewTask = () => {
       completion_date,
     } = values;
 
-
+    // calculate the total payable amount
     const total_payable_amount = required_workers * payable_amount;
     console.log(total_payable_amount);
-    if(total_payable_amount > userData.availableCoin){
-        message.error('Not available Coin.  Purchase Coin');
-    }else{
-        console.log('You can add task')
+    if (total_payable_amount > userData.availableCoin) {
+      message.error("Not available Coin.  Purchase Coin");
+      navigate("/dashboard/purchase-coin");
+      return;
+    } else {
+      console.log("You can add task");
+
+      // img upload on imgbb
+      const imgPath = task_image_url[0].originFileObj;
+      const res = await axios.post(
+        imgbbHostingURL,
+        { image: imgPath },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(res);
+
+      if (res.data.success) {
+        const task_image_url = res.data.data.url;
+
+        const newTask = {
+          task_title,
+          task_detail,
+          required_workers,
+          payable_amount,
+          submission_info,
+          task_image_url,
+          completion_date,
+          buyer_email: email
+        };
+
+        // save the task to db
+        axiosSecure.post('/tasks',newTask)
+        .then(res=>{
+          if(res.data.insertedId){
+            // reduce buyer's coin
+            const remainingCoin = userData.availableCoin - total_payable_amount;
+            const updatedCoin = {availableCoin: remainingCoin};
+            axiosSecure.patch('/users',updatedCoin)
+            .then(res=>{
+              if(res.data.modifiedCount > 0){
+                refetchUserData();
+                form.resetFields();
+                Swal.fire({
+                  title: 'Success!',
+                  text: 'Task added successfully.',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 2000, 
+                });         
+              }
+            })
+          }else{
+            message.error('Failed to add new task')
+          }
+        })
+      } else {
+        message.error("Failed to add new task")
+        console.log(res.data);
+      }
     }
   };
 
