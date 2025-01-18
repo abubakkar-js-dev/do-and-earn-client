@@ -89,7 +89,7 @@ const AddNewTask = () => {
             // reduce buyer's coin
             const remainingCoin = userData.availableCoin - total_payable_amount;
             const updatedCoin = {availableCoin: remainingCoin};
-            axiosSecure.patch('/users',updatedCoin)
+            axiosSecure.patch(`/users?email=${user?.email}`,updatedCoin)
             .then(res=>{
               if(res.data.modifiedCount > 0){
                 refetchUserData();

@@ -9,6 +9,7 @@ import BuyerHome from "../pages/Dashboard/Buyer/BuyerHome/BuyerHome";
 import AddNewTask from "../pages/Dashboard/Buyer/AddNewTask/AddNewTask";
 import PrivateRoute from "./PrivateRoute";
 import PurchaseCoin from "../pages/Dashboard/Buyer/PurchaseCoin/PurchaseCoin";
+import MyTasks from "../pages/Dashboard/Buyer/MyTasks/MyTasks";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         {
           path: 'purchase-coin',
           element: <PurchaseCoin />
+        },
+        {
+          path: 'my-tasks',
+          element: <MyTasks />
         },
         // for worker
         {
