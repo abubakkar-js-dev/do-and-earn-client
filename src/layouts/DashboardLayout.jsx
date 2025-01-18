@@ -4,13 +4,22 @@ import { IoBarbellOutline, IoHomeOutline } from "react-icons/io5";
 import { MdPayments } from "react-icons/md";
 import { TiSocialSkypeOutline, TiUserOutline } from "react-icons/ti";
 import { NavLink, Outlet } from "react-router-dom";
+import useUserData from "../hooks/useUserData";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const DashboardLayout = () => {
-  const userRole = "buyer"; // Change this to "buyer" or "admin" to test roles
-  const userName = "John Doe";
-  const availableCoins = 50;
+  const {userData} = useUserData();
+
+  const userRole = userData.role;
+  const userName = userData.name;
+  const availableCoins = userData.availableCoin;
+
+  console.log(userRole, "from ....")
+
+  // const userRole = "buyer"; 
+  // const userName = "John Doe";
+  // const availableCoins = 50;
 
   const navigationItems = {
     Worker: [
@@ -20,7 +29,7 @@ const DashboardLayout = () => {
       { key: "4", label: "Withdrawals", icon: <FaCoins /> },
     ],
     Buyer: [
-      { key: "1", label: <NavLink to="/dashboard/buyer-home">Home</NavLink>, icon: <IoHomeOutline /> },
+      { key: "1", label: <NavLink to="/dashboard">Home</NavLink>, icon: <IoHomeOutline /> },
       { key: "2", label: <NavLink to="/dashboard/add-new-task">Add New Tasks</NavLink>, icon: <TiSocialSkypeOutline /> },
       { key: "3", label: "My Tasks", icon: <TiUserOutline /> },
       { key: "4", label: "Purchase Coin", icon: <FaCoins /> },
@@ -46,7 +55,7 @@ const DashboardLayout = () => {
         <Menu
           theme="dark"
           mode="inline"
-          items={navigationItems[userRole.charAt(0).toUpperCase() + userRole.slice(1)]?.map((item) => ({
+          items={navigationItems[userRole?.charAt(0).toUpperCase() + userRole?.slice(1)]?.map((item) => ({
             key: item.key,
             icon: item.icon,
             label: item.label,

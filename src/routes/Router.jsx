@@ -7,6 +7,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import WorkerHome from "../pages/Dashboard/Worker/WorkerHome/WorkerHome";
 import BuyerHome from "../pages/Dashboard/Buyer/BuyerHome/BuyerHome";
 import AddNewTask from "../pages/Dashboard/Buyer/AddNewTask/AddNewTask";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -29,11 +30,11 @@ const router = createBrowserRouter([
     },
     {
       path: '/dashboard',
-      element: <DashboardLayout />,
+      element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
       children: [
         // for buyer
         {
-          path: 'buyer-home',
+          path: '',
           element: <BuyerHome />
         },
         {
