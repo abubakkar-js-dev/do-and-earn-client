@@ -83,7 +83,7 @@ const PaymentForm = ({ selectedPackage, onCancel }) => {
               coin: selectedPackage.coins,
               email: user?.email,
               name: user?.displayName || 'anonymous',
-              data: new Date().toISOString(), 
+              date: new Date().toISOString(), 
             };
           
             try {

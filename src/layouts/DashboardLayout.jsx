@@ -29,11 +29,11 @@ const DashboardLayout = () => {
       { key: "4", label: "Withdrawals", icon: <FaCoins /> },
     ],
     Buyer: [
-      { key: "1", label: <NavLink to="/dashboard">Home</NavLink>, icon: <IoHomeOutline /> },
+      { key: "1", label: <NavLink to="/dashboard/buyer-home">Home</NavLink>, icon: <IoHomeOutline /> },
       { key: "2", label: <NavLink to="/dashboard/add-new-task">Add New Tasks</NavLink>, icon: <TiSocialSkypeOutline /> },
       { key: "3", label: <NavLink to="/dashboard/my-tasks">My Tasks</NavLink>, icon: <TiUserOutline /> },
       { key: "4", label: <NavLink to="/dashboard/purchase-coin">Purchase Coin</NavLink>, icon: <FaCoins /> },
-      { key: "5", label: "Payment History", icon: <MdPayments /> },
+      { key: "5", label: <NavLink to="/dashboard/payment-history">Payment History</NavLink>, icon: <MdPayments /> },
     ],
     Admin: [
       { key: "1", label: "Home", icon: <IoHomeOutline /> },

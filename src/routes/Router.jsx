@@ -10,6 +10,8 @@ import AddNewTask from "../pages/Dashboard/Buyer/AddNewTask/AddNewTask";
 import PrivateRoute from "./PrivateRoute";
 import PurchaseCoin from "../pages/Dashboard/Buyer/PurchaseCoin/PurchaseCoin";
 import MyTasks from "../pages/Dashboard/Buyer/MyTasks/MyTasks";
+import PaymentHistory from "../pages/Dashboard/Buyer/PaymentHistory/PaymentHistory";
+import BuyerRoute from "./BuyerRoute";
 
 const router = createBrowserRouter([
     {
@@ -36,20 +38,24 @@ const router = createBrowserRouter([
       children: [
         // for buyer
         {
-          path: '',
-          element: <BuyerHome />
+          path: 'buyer-home',
+          element: <BuyerRoute><BuyerHome /></BuyerRoute>
         },
         {
           path: 'add-new-task',
-          element: <AddNewTask />
+          element: <BuyerRoute><AddNewTask /></BuyerRoute>
         },
         {
           path: 'purchase-coin',
-          element: <PurchaseCoin />
+          element: <BuyerRoute><PurchaseCoin /></BuyerRoute>
         },
         {
           path: 'my-tasks',
-          element: <MyTasks />
+          element: <BuyerRoute><MyTasks /></BuyerRoute>
+        },
+        {
+          path: 'payment-history',
+          element: <BuyerRoute><PaymentHistory /></BuyerRoute>
         },
         // for worker
         {

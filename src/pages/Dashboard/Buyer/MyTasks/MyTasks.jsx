@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useUserData from "../../../../hooks/useUserData";
+import Loading from "../../../../components/Loading/Loading";
 
 const MyTasks = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,7 +16,7 @@ const MyTasks = () => {
   const [form] = Form.useForm();
 
 
-  const { data: myTasks = [], refetch } = useQuery({
+  const { data: myTasks = [], refetch,isPending:myTaskLoading } = useQuery({
     queryKey: ["my-tasks"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/my-tasks/${user?.email}`);
@@ -161,6 +162,10 @@ const MyTasks = () => {
       ),
     },
   ];
+
+  if(myTaskLoading){
+    return <Loading />
+  }
 
   return (
     <div className="p-6">
