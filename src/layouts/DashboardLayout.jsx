@@ -78,7 +78,7 @@ const DashboardLayout = () => {
         >
           <div style={{ fontSize: "16px", fontWeight: "bold" }}>
             <span className="mr-2">Available Coins:</span>
-            <Badge count={availableCoins} showZero>
+            <Badge count={availableCoins} overflowCount={999999} showZero>
               <FaCoins style={{ color: "gold" }} />
             </Badge>
           </div>
