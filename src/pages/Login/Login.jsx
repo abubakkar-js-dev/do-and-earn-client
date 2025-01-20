@@ -14,7 +14,6 @@ import animationData from "../../assets/lottifiles/login.json";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const { Title, Text } = Typography;
 
@@ -23,8 +22,6 @@ const Login = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure();
-
 
 
   const onFinish = (values) => {
@@ -32,17 +29,10 @@ const Login = () => {
 
     // login user
     loginUser(email, password)
-      .then(async() => {
-        const {data: updatedRole} = await axiosSecure.get(`/users/role/${email}`);
+      .then(() => {
         message.success("Successfully Loged in");
         form.resetFields();
-        if(updatedRole?.role === 'buyer'){
-          navigate('/dashboard/buyer-home');
-        }else if(updatedRole?.role === 'admin'){
-          navigate('/dashboard/admin-home');
-        }else if(updatedRole?.role === 'worker'){
-          navigate('/dashboard/worker-home');
-        }
+        navigate("/dashboard");
       })
       .catch((err) => {
         console.log(err);
@@ -87,17 +77,10 @@ const Login = () => {
         }
 
         axiosPublic.post('/users',newUser)
-        .then(async(res)=>{
+        .then(res=>{
           if(res.data.insertedId){
             message.success("Login with google successfully");
-            const {data: updatedRole} = await axiosSecure.get(`/users/role/${email}`);
-            if(updatedRole?.role === 'buyer'){
-              navigate('/dashboard/buyer-home');
-            }else if(updatedRole?.role === 'admin'){
-              navigate('/dashboard/admin-home');
-            }else if(updatedRole?.role === 'worker'){
-              navigate('/dashboard/worker-home');
-            }
+            navigate('/dashboard');
           }
         })
         

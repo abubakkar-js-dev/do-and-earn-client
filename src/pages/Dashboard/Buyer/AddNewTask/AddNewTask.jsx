@@ -79,6 +79,7 @@ const AddNewTask = () => {
           submission_info,
           task_image_url,
           completion_date,
+          buyer_name: user?.displayName,
           buyer_email: email
         };
 

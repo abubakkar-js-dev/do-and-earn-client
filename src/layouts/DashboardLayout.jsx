@@ -24,8 +24,8 @@ const DashboardLayout = () => {
   const navigationItems = {
     Worker: [
       { key: "1", label: <NavLink to="/dashboard/worker-home">Home</NavLink>, icon: <IoHomeOutline /> },
-      { key: "2", label: "Task List", icon: <TiSocialSkypeOutline /> },
-      { key: "3", label: "My Submissions", icon: <TiUserOutline /> },
+      { key: "2", label: <NavLink to="/dashboard/task-list">Task List</NavLink>, icon: <TiSocialSkypeOutline /> },
+      { key: "3", label:  <NavLink to="/dashboard/my-submissions">My Submissions</NavLink> , icon: <TiUserOutline /> },
       { key: "4", label: "Withdrawals", icon: <FaCoins /> },
     ],
     Buyer: [

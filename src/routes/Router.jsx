@@ -12,6 +12,10 @@ import PurchaseCoin from "../pages/Dashboard/Buyer/PurchaseCoin/PurchaseCoin";
 import MyTasks from "../pages/Dashboard/Buyer/MyTasks/MyTasks";
 import PaymentHistory from "../pages/Dashboard/Buyer/PaymentHistory/PaymentHistory";
 import BuyerRoute from "./BuyerRoute";
+import WorkerRoute from "./WorkerRoute";
+import TaskList from "../pages/Dashboard/Worker/TaskList/TaskList";
+import TaskDetails from "../pages/Dashboard/Worker/TaskDetails/TaskDetails";
+import MySubmissions from "../pages/Dashboard/Worker/MySubmissions/MySubmissions";
 
 const router = createBrowserRouter([
     {
@@ -60,7 +64,19 @@ const router = createBrowserRouter([
         // for worker
         {
           path: 'worker-home',
-          element: <WorkerHome />
+          element: <WorkerRoute><WorkerHome /></WorkerRoute>
+        },
+        {
+          path: 'task-list',
+          element: <WorkerRoute><TaskList /></WorkerRoute>
+        },
+        {
+          path: 'task-details/:id',
+          element: <WorkerRoute><TaskDetails /></WorkerRoute>
+        },
+        {
+          path: 'my-submissions',
+          element: <WorkerRoute><MySubmissions /></WorkerRoute>
         }
       ]
     }
