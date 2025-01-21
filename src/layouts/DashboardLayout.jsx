@@ -26,7 +26,7 @@ const DashboardLayout = () => {
       { key: "1", label: <NavLink to="/dashboard/worker-home">Home</NavLink>, icon: <IoHomeOutline /> },
       { key: "2", label: <NavLink to="/dashboard/task-list">Task List</NavLink>, icon: <TiSocialSkypeOutline /> },
       { key: "3", label:  <NavLink to="/dashboard/my-submissions">My Submissions</NavLink> , icon: <TiUserOutline /> },
-      { key: "4", label: "Withdrawals", icon: <FaCoins /> },
+      { key: "4", label: <NavLink to="/dashboard/withdrawals">Withdrawals</NavLink>, icon: <FaCoins /> },
     ],
     Buyer: [
       { key: "1", label: <NavLink to="/dashboard/buyer-home">Home</NavLink>, icon: <IoHomeOutline /> },
@@ -36,9 +36,9 @@ const DashboardLayout = () => {
       { key: "5", label: <NavLink to="/dashboard/payment-history">Payment History</NavLink>, icon: <MdPayments /> },
     ],
     Admin: [
-      { key: "1", label: "Home", icon: <IoHomeOutline /> },
-      { key: "2", label: "Manage Users", icon: <TiUserOutline /> },
-      { key: "3", label: "Manage Tasks", icon: <TiSocialSkypeOutline /> },
+      { key: "1", label: <NavLink to="/dashboard/admin-home">Home</NavLink>, icon: <IoHomeOutline /> },
+      { key: "2", label: <NavLink to="/dashboard/manage-users">Manage Users</NavLink>, icon: <TiUserOutline /> },
+      { key: "3", label: <NavLink to="/dashboard/manage-tasks">Manage Tasks</NavLink>, icon: <TiSocialSkypeOutline /> },
     ],
   };
 

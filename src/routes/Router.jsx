@@ -16,6 +16,10 @@ import WorkerRoute from "./WorkerRoute";
 import TaskList from "../pages/Dashboard/Worker/TaskList/TaskList";
 import TaskDetails from "../pages/Dashboard/Worker/TaskDetails/TaskDetails";
 import MySubmissions from "../pages/Dashboard/Worker/MySubmissions/MySubmissions";
+import Withdrawals from "../pages/Dashboard/Worker/Withdrawals/Withdrawals";
+import AdminHome from "../pages/Dashboard/Admin/AdminHome/AdminHome";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import ManageTasks from "../pages/Dashboard/Admin/ManageTasks/ManageTasks";
 
 const router = createBrowserRouter([
     {
@@ -77,6 +81,23 @@ const router = createBrowserRouter([
         {
           path: 'my-submissions',
           element: <WorkerRoute><MySubmissions /></WorkerRoute>
+        },
+        {
+          path: 'withdrawals',
+          element: <WorkerRoute><Withdrawals /></WorkerRoute>
+        },
+        //  for admin
+        {
+          path: 'admin-home',
+          element: <AdminHome />
+        },
+        {
+          path: 'manage-users',
+          element: <ManageUsers />
+        },
+        {
+          path: 'manage-tasks',
+          element: <ManageTasks />
         }
       ]
     }
