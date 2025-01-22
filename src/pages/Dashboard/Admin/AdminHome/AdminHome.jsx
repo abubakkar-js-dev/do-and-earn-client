@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../../components/Loading/Loading";
 import { message } from "antd";
@@ -66,12 +66,13 @@ const AdminHome = () => {
     <div className="p-4">
 
       {/* Admin Stats Pie Chart */}
-      <div className="mb-8">
+      <div className="mb-8 ">
         {/* <h3 className="text-lg font-semibold mb-4">Admin Stats</h3> */}
         {adminStateLoading ? (
           <Loading />
         ) : (
-          <PieChart width={400} height={400}>
+            <ResponsiveContainer width="100%" height={400}>
+          <PieChart className="w-[300px] h-[300px]" width={400} height={400}>
             <Pie
               data={pieData}
               dataKey="value"
@@ -89,16 +90,17 @@ const AdminHome = () => {
             <Tooltip />
             <Legend />
           </PieChart>
+            </ResponsiveContainer>
         )}
       </div>
 
       {/* Withdraw Requests */}
-      <div>
+      <div className="w-full overflow-x-auto">
         <h3 className="text-lg font-semibold mb-4">Withdraw Requests</h3>
         {withdrawalsLoading ? (
           <Loading />
         ) : (
-          <table className="overflow-x-auto w-full border-collapse border border-gray-300">
+          <table className=" table-auto w-full border-collapse border border-gray-300">
             <thead>
               <tr>
                 <th className="border border-gray-300 p-2">Worker Name</th>
