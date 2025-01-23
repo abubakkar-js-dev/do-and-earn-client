@@ -1,13 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../../components/Loading/Loading";
 import { message } from "antd";
 import useUserData from "../../../../hooks/useUserData";
+import { Helmet } from "react-helmet-async";
 
 const AdminHome = () => {
   const axiosSecure = useAxiosSecure();
-  const {refetch} = useUserData();
+  const { refetch } = useUserData();
 
   // Fetch admin stats
   const { data: adminStats = {}, isLoading: adminStateLoading } = useQuery({
@@ -41,10 +49,10 @@ const AdminHome = () => {
         worker_email: withdrawal.worker_email,
       });
       console.log(res.data);
-      if(res.data.success === true){
-          message.success("Payment status updated successfully!");
-          refetchWithdrawals();
-          refetch();
+      if (res.data.success === true) {
+        message.success("Payment status updated successfully!");
+        refetchWithdrawals();
+        refetch();
       }
     } catch (error) {
       console.error("Error updating withdrawal status:", error);
@@ -64,33 +72,38 @@ const AdminHome = () => {
 
   return (
     <div className="p-4">
-
+      <Helmet>
+        <title>Home | Admin | Dashboard | Do&Earn</title>
+      </Helmet>
       {/* Admin Stats Pie Chart */}
       <div className="mb-8 ">
         {/* <h3 className="text-lg font-semibold mb-4">Admin Stats</h3> */}
         {adminStateLoading ? (
           <Loading />
         ) : (
-            <ResponsiveContainer width="100%" height={400}>
-          <PieChart className="w-[300px] h-[300px]" width={400} height={400}>
-            <Pie
-              data={pieData}
-              dataKey="value"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              outerRadius={150}
-              fill="#8884d8"
-              label
-            >
-              {pieData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-            </ResponsiveContainer>
+          <ResponsiveContainer width="100%" height={400}>
+            <PieChart width={400} height={400}>
+              <Pie
+                data={pieData}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={150}
+                fill="#8884d8"
+                label
+              >
+                {pieData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
         )}
       </div>
 
@@ -115,12 +128,24 @@ const AdminHome = () => {
             <tbody>
               {withdrawals.map((withdrawal) => (
                 <tr key={withdrawal._id}>
-                  <td className="border border-gray-300 p-2">{withdrawal.worker_name}</td>
-                  <td className="border border-gray-300 p-2">{withdrawal.worker_email}</td>
-                  <td className="border border-gray-300 p-2">{withdrawal.withdrawal_coin}</td>
-                  <td className="border border-gray-300 p-2">{withdrawal.withdrawal_amount}</td>
-                  <td className="border border-gray-300 p-2">{withdrawal.payment_system}</td>
-                  <td className="border border-gray-300 p-2">{withdrawal.status}</td>
+                  <td className="border border-gray-300 p-2">
+                    {withdrawal.worker_name}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {withdrawal.worker_email}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {withdrawal.withdrawal_coin}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {withdrawal.withdrawal_amount}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {withdrawal.payment_system}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {withdrawal.status}
+                  </td>
                   <td className="border border-gray-300 p-2">
                     {withdrawal.status === "pending" && (
                       <button

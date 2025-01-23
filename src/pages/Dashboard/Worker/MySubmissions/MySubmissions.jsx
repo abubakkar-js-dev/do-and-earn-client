@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../../components/Loading/Loading";
 import moment from "moment";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const MySubmissions = () => {
   const { user } = useAuth();
@@ -34,8 +35,11 @@ const MySubmissions = () => {
   const totalPages = Math.ceil(totalSubmissions / submissionsPerPage);
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold text-center mb-6">My Submissions</h1>
+    <div className="p-4 md:p-6 bg-gray-100 min-h-screen">
+      <Helmet>
+        <title>My Submissions | Worker | Dashboard | Do&Earn</title>
+      </Helmet>
+      <h2 className="text-xl md:text-2xl font-bold text-center mb-6">My Submissions</h2>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white rounded-lg shadow-md">
           <thead className="bg-blue-600 text-white">

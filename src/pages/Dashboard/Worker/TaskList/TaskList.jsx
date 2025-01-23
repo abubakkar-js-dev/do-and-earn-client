@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import useTasks from "../../../../hooks/useTasks";
 import Loading from "../../../../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const TaskList = () => {
   const { tasks,taskLoading } = useTasks(); 
@@ -11,8 +12,11 @@ const TaskList = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold text-center mb-6">Available Tasks</h1>
+    <div className="p-4 md:p-6 bg-gray-100 min-h-screen">
+            <Helmet>
+              <title>Task-List | Worker | Dashboard | Do&Earn</title>
+            </Helmet>
+      <h2 className="text-xl md:text-2xl font-bold text-center mb-6">Available Tasks</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tasks
           ?.filter((task) => task.required_workers > 0) // Filter tasks where required_workers > 0

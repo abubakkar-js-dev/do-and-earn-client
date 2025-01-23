@@ -6,6 +6,7 @@ import useAuth from "../../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useUserData from "../../../../hooks/useUserData";
 import Loading from "../../../../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const MyTasks = () => {
   const axiosSecure = useAxiosSecure();
@@ -168,9 +169,13 @@ const MyTasks = () => {
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">My Tasks</h1>
+    <div className="p-4 md:p-6">
+      <Helmet>
+        <title>My Tasks | Buyer | Dashboard | Do&Earn</title>
+      </Helmet>
+      <h2 className="text-xl md:text-2xl font-bold mb-4">My Tasks</h2>
       <Table
+        className="overflow-x-auto"
         dataSource={myTasks}
         columns={columns}
         rowKey={(task) => task._id}

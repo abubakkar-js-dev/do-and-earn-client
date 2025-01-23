@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Table, Select, Button, message, Popconfirm } from "antd";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -115,8 +116,13 @@ const ManageUsers = () => {
   ];
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-6 text-cente">Manage Users</h1>
+    <div className="p-4 md:p-6">
+      <Helmet>
+        <title>Manage Users | Admin | Dashboard | Do&Earn</title>
+      </Helmet>
+      <h2 className="text-xl md:text-2xl font-semibold mb-6 text-cente">
+        Manage Users
+      </h2>
       {isLoading ? (
         <Loading />
       ) : (

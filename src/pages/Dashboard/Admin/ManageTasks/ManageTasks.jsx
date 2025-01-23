@@ -3,6 +3,7 @@ import moment from "moment";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const ManageTasks = () => {
   const axiosSecure = useAxiosSecure();
@@ -111,8 +112,11 @@ const ManageTasks = () => {
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-6">Manage Tasks</h1>
+    <div className="p-4 md:p-6">
+            <Helmet>
+              <title>Manage Task | Admin | Dashboard | Do&Earn</title>
+            </Helmet>
+      <h2 className="text-xl md:text-2xl font-semibold mb-6">Manage Tasks</h2>
       <Table
         className="overflow-x-auto"
         dataSource={tasks}

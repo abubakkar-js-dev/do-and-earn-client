@@ -14,6 +14,7 @@ import animationData from "../../assets/lottifiles/login.json";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet-async";
 
 const { Title, Text } = Typography;
 
@@ -93,6 +94,9 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-green-50 px-4">
+      <Helmet>
+        <title>Login | Do&Earn</title>
+      </Helmet>
       <div className="bg-white shadow-2xl rounded-xl overflow-hidden grid grid-cols-1 md:grid-cols-2 w-full max-w-4xl">
         {/* Left Side - Lottie Animation */}
         <div className="flex items-center justify-center bg-blue-100 p-6">

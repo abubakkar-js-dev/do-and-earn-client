@@ -4,12 +4,13 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 import moment from "moment";
 import Loading from "../../../../components/Loading/Loading";
+import { Helmet } from "react-helmet-async";
 
 const PaymentHistory = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { data: payments = [],isPending:paymentsLoading } = useQuery({
+  const { data: payments = [], isPending: paymentsLoading } = useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/payments/${user?.email}`);
@@ -53,12 +54,17 @@ const PaymentHistory = () => {
     },
   ];
 
-  if(paymentsLoading){
-    return <Loading />
+  if (paymentsLoading) {
+    return <Loading />;
   }
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold text-center mb-4">Payment History</h1>
+    <div className="p-4 md:p-6">
+      <Helmet>
+        <title>Payment History | Buyer | Dashboard | Do&Earn</title>
+      </Helmet>
+      <h2 className="text-xl md:text-2xl font-bold text-center mb-4">
+        Payment History
+      </h2>
       <div className="overflow-auto">
         <Table
           columns={columns}

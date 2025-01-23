@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 import Loading from "../../../../components/Loading/Loading";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const BuyerHome = () => {
   const { user } = useAuth();
@@ -115,8 +116,11 @@ const BuyerHome = () => {
   ];
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Buyer Home</h1>
+    <div className="p-4 md:p-6">
+      <Helmet>
+        <title>Home | Buyer | Dashboard | Do&Earn</title>
+      </Helmet>
+      <h2 className="text-xl md:text-2xl font-bold mb-4">Buyer Home</h2>
 
       {/* Buyer Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">

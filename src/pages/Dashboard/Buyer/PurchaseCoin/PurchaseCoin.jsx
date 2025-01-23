@@ -4,6 +4,7 @@ import { FaCoins } from "react-icons/fa";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "./PaymentForm";
+import { Helmet } from "react-helmet-async";
 
 const stripePromise = loadStripe(import.meta.env.VITE_stripe_publish_key);
 
@@ -27,7 +28,10 @@ const PurchaseCoin = () => {
 
   return (
     <div className="p-6 flex flex-col items-center">
-      <h1 className="text-2xl font-bold mb-6 text-center">Purchase Coins</h1>
+      <Helmet>
+        <title>Purchase Coin | Buyer | Dashboard | Do&Earn</title>
+      </Helmet>
+      <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">Purchase Coins</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {coinPackages.map((pkg, index) => (
           <Card

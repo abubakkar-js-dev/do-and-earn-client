@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 import Loading from "../../../../components/Loading/Loading";
 import { message } from "antd";
+import { Helmet } from "react-helmet-async";
 
 const TaskDetails = () => {
   const { id } = useParams(); 
@@ -54,8 +55,11 @@ const TaskDetails = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold text-center mb-6">Task Details</h1>
+    <div className="p-4 md:p-6 bg-gray-100 min-h-screen">
+      <Helmet>
+        <title>Task Details | Worker | Dashboard | Do&Earn</title>
+      </Helmet>
+      <h2 className="text-xl md:text-2xl font-bold text-center mb-6">Task Details</h2>
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
         <img
           src={task.task_image_url}

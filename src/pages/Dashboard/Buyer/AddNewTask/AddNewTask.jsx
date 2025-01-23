@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const imgbbApiKey = import.meta.env.VITE_imgbbApiKey;
 const imgbbHostingURL = `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`;
@@ -117,8 +118,11 @@ const AddNewTask = () => {
 
   return (
     <div className=" bg-gray-100 flex justify-center items-center rounded-lg">
-      <div className=" p-8 rounded-lg w-[80%] max-w-5xl">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+      <Helmet>
+        <title>Add New Task | Buyer | Dashboard | Do&Earn</title>
+      </Helmet>
+      <div className="pt-4 md:p-6 rounded-lg w-[80%] max-w-5xl">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
           <FaTasks className="text-blue-500" />
           Add New Task
         </h2>

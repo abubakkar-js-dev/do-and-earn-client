@@ -4,6 +4,7 @@ import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useUserData from "../../../../hooks/useUserData";
 import moment from "moment";
+import { Helmet } from "react-helmet-async";
 
 const Withdrawals = () => {
   const { user } = useAuth();
@@ -48,8 +49,11 @@ const Withdrawals = () => {
   const hasSufficientCoins = userData.availableCoin >= 200;
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold text-center mb-6">Withdrawals</h1>
+    <div className="p-4 md:p-6 bg-gray-100 min-h-screen">
+            <Helmet>
+              <title>Withdrawals | Worker | Dashboard | Do&Earn</title>
+            </Helmet>
+      <h2 className="text-xl md:text-2xl font-bold text-center mb-6">Withdrawals</h2>
 
       {/* User Earnings */}
       <div className="mb-6 bg-white p-6 rounded-lg shadow-md">

@@ -20,6 +20,7 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -128,6 +129,9 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-green-50 px-4">
+      <Helmet>
+        <title>Register | Do&Earn</title>
+      </Helmet>
       <div className="bg-blue-50 border border-green-300   rounded-xl overflow-hidden  w-full max-w-2xl">
         <div className="p-8">
           <Row justify="center" className="mb-6">

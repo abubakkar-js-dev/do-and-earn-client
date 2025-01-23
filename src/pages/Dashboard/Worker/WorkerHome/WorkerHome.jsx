@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Table } from "antd";
 import Loading from "../../../../components/Loading/Loading";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 import { FaTasks } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const COLORS = ["#0088FE", "#FFBB28", "#FF8042"]; // Colors for the pie chart
 
@@ -78,15 +79,19 @@ const WorkerHome = () => {
   ];
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6 flex items-center gap-2">
+    <div className="p-4 md:p-6">
+      <Helmet>
+        <title>Home | Worker | Dashboard | Do&Earn</title>
+      </Helmet>
+      <h2 className="text-xl md:text-2xl font-bold mb-6 flex items-center gap-2">
         <FaTasks className="text-blue-500" />
         Worker Dashboard
-      </h1>
+      </h2>
 
       {/* Worker Stats Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
         <div className="bg-white shadow-md p-6 rounded-lg">
+          <ResponsiveContainer width="100%" height={300}>
           <PieChart className="mx-auto" width={300} height={300}>
             <Pie
               data={pieData}
@@ -108,11 +113,12 @@ const WorkerHome = () => {
             <Tooltip />
             <Legend />
           </PieChart>
+          </ResponsiveContainer>
         </div>
 
         {/* Stats Summary */}
         <div className="bg-white shadow-md p-6 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">Summary</h2>
+          <h2 className="text-lg md:text-xl font-semibold mb-4">Summary</h2>
           <ul className="space-y-4">
             <li className="flex items-center justify-between">
               <span>Total Submissions:</span>
@@ -136,8 +142,9 @@ const WorkerHome = () => {
 
       {/* Approved Submissions Table */}
       <div className="bg-white shadow-md p-6 rounded-lg">
-        <h2 className="text-xl font-semibold mb-4">Approved Submissions</h2>
+        <h2 className="text-lg md:text-xl font-semibold mb-4">Approved Submissions</h2>
         <Table
+          className="overflow-x-auto"
           dataSource={submissions}
           columns={columns}
           rowKey="_id"

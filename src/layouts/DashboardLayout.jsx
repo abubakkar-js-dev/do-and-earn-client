@@ -5,8 +5,9 @@ import { MdPayments } from "react-icons/md";
 import { TiSocialSkypeOutline, TiUserOutline } from "react-icons/ti";
 import { NavLink, Outlet } from "react-router-dom";
 import useUserData from "../hooks/useUserData";
+import logo from "../assets/images/logo-2.png";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
 const DashboardLayout = () => {
   const {userData} = useUserData();
@@ -51,7 +52,9 @@ const DashboardLayout = () => {
         // style={{ height: "100vh" }}
         className="min-h-screen"
       >
-        <div className="p-4 text-center text-white text-lg font-bold">Logo</div>
+        <div className="p-4 text-center text-white text-lg font-bold">
+          <img src={logo} alt="Logo" className="w-16 h-12 mx-auto rounded-3xl  object-cover" />
+        </div>
         <Menu
           theme="dark"
           mode="inline"
@@ -104,15 +107,10 @@ const DashboardLayout = () => {
 
         {/* Content */}
         <Content
-          style={{
-            padding: "16px",
-            margin: "16px",
-          }}
         >
           <div
             style={{
               background: "white",
-              padding: "24px",
               borderRadius: "8px",
               minHeight: "300px",
               boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
@@ -123,7 +121,7 @@ const DashboardLayout = () => {
         </Content>
 
         {/* Footer */}
-        <Footer style={{ textAlign: "center" }}>Footer Section</Footer>
+        {/* <Footer style={{ textAlign: "center" }}>Footer Section</Footer> */}
       </Layout>
     </Layout>
   );
