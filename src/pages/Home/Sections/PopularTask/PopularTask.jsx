@@ -14,7 +14,7 @@ const PopularTask = () => {
     },
   });
 
-  console.log(popularTasks);
+  // console.log(popularTasks);
 
   if (isLoading) return <Loading />;
 

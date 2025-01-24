@@ -6,6 +6,7 @@ import { TiSocialSkypeOutline, TiUserOutline } from "react-icons/ti";
 import { NavLink, Outlet } from "react-router-dom";
 import useUserData from "../hooks/useUserData";
 import logo from "../assets/images/logo-2.png";
+import { Helmet } from "react-helmet-async";
 
 const { Header, Content, Sider } = Layout;
 
@@ -16,7 +17,7 @@ const DashboardLayout = () => {
   const userName = userData.name;
   const availableCoins = userData.availableCoin;
 
-  console.log(userRole, "from ....")
+  // console.log(userRole, "from ....")
 
   // const userRole = "buyer"; 
   // const userName = "John Doe";
@@ -45,6 +46,9 @@ const DashboardLayout = () => {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
+    <Helmet>
+      <title>Dashboard | Do&Earn</title>
+    </Helmet>
       {/* Sidebar */}
       <Sider
         breakpoint="lg"

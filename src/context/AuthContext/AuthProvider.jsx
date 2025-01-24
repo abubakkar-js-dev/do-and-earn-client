@@ -11,7 +11,7 @@ const AuthProvider = ({children}) => {
     const [user,setUser] = useState(null);
     const googleProvider = new GoogleAuthProvider();
     const axiosPublic = useAxiosPublic();
-    console.log(user);
+    // console.log(user);
 
     const createUser = (email,password)=>{
         setLoading(true);
@@ -46,7 +46,7 @@ const AuthProvider = ({children}) => {
 
                 axiosPublic.post('/jwt',userInfo)
                 .then(res=>{
-                    console.log(res.data);
+                    // console.log(res.data);
                     localStorage.setItem('access-token',res.data.token);
                     setUser(currentUser);
                     setLoading(false);

@@ -8,7 +8,7 @@ import useAuth from "../../../../hooks/useAuth";
 import useUserData from "../../../../hooks/useUserData";
 
 const PaymentForm = ({ selectedPackage, onCancel }) => {
-    console.log(selectedPackage)
+    // console.log(selectedPackage)
     const axiosSecure = useAxiosSecure();
     const [clientSecret,setClientSecret] = useState('');
     const stripe = useStripe();
@@ -23,7 +23,7 @@ const PaymentForm = ({ selectedPackage, onCancel }) => {
         if(selectedPackage.price > 0){
             axiosSecure.post('/create-payment-intent',{price: selectedPackage.price})
             .then(res=>{
-                console.log(res.data.clientSecret);
+                // console.log(res.data.clientSecret);
                 setClientSecret(res.data.clientSecret);
             })
         }
@@ -75,7 +75,7 @@ const PaymentForm = ({ selectedPackage, onCancel }) => {
           setProcessing(false);
         }else{
           if (paymentIntent.status === 'succeeded') {
-            console.log(paymentIntent.id, 'TransId');
+            // console.log(paymentIntent.id, 'TransId');
           
             const payment = {
               transactionId: paymentIntent.id, 
@@ -92,9 +92,9 @@ const PaymentForm = ({ selectedPackage, onCancel }) => {
                 const totatCoin = {
                   availableCoin: userData.availableCoin + selectedPackage.coins,
                 };
-                console.log(userData.availableCoin)
-                console.log(selectedPackage.coins);
-                console.log(totatCoin);
+                // console.log(userData.availableCoin)
+                // console.log(selectedPackage.coins);
+                // console.log(totatCoin);
                 const coinUpdateRes = await axiosSecure.patch(`/users?email=${user?.email}`, totatCoin);
                 if (coinUpdateRes.data.modifiedCount > 0) {
                   message.success("Payment successful!");

@@ -14,7 +14,7 @@ const BestWorkers = () => {
         }
     })
 
-    console.log(bestWorkers);
+    // console.log(bestWorkers);
     
     return (
         <div className="bg-green-50 -mt-12 py-10">

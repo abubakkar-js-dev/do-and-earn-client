@@ -16,7 +16,7 @@ const ManageTasks = () => {
     }
   })
 
-  console.log(tasks,'from all tasks');
+  // console.log(tasks,'from all tasks');
 
   // Function to handle task deletion
   const handleDeleteTask = async (taskId) => {

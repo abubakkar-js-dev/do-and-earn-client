@@ -2,7 +2,7 @@ import { Card } from "antd";
 import PropTypes from "prop-types";
 
 const TaskCard = ({task}) => {
-    console.log(task);
+    // console.log(task);
     const { task_title, task_detail, task_image_url, required_workers, payable_amount, completion_date } = task;
     return (
         <Card

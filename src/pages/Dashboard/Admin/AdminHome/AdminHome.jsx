@@ -48,7 +48,7 @@ const AdminHome = () => {
         withdrawal_coin: withdrawal.withdrawal_coin,
         worker_email: withdrawal.worker_email,
       });
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.success === true) {
         message.success("Payment status updated successfully!");
         refetchWithdrawals();

@@ -31,11 +31,11 @@ const AddNewTask = () => {
 
   // user data from database
 
-  console.log(userData, "from add task");
-  console.log(userData.role);
+  // console.log(userData, "from add task");
+  // console.log(userData.role);
 
   const handleSubmit = async (values) => {
-    console.log("Form values:", values);
+    // console.log("Form values:", values);
     const {
       task_title,
       task_detail,
@@ -48,13 +48,13 @@ const AddNewTask = () => {
 
     // calculate the total payable amount
     const total_payable_amount = required_workers * payable_amount;
-    console.log(total_payable_amount);
+    // console.log(total_payable_amount);
     if (total_payable_amount > userData.availableCoin) {
       message.error("Not available Coin.  Purchase Coin");
       navigate("/dashboard/purchase-coin");
       return;
     } else {
-      console.log("You can add task");
+      // console.log("You can add task");
 
       // img upload on imgbb
       const imgPath = task_image_url[0].originFileObj;
@@ -67,7 +67,7 @@ const AddNewTask = () => {
           },
         }
       );
-      console.log(res);
+      // console.log(res);
 
       if (res.data.success) {
         const task_image_url = res.data.data.url;
@@ -111,7 +111,7 @@ const AddNewTask = () => {
         })
       } else {
         message.error("Failed to add new task")
-        console.log(res.data);
+        // console.log(res.data);
       }
     }
   };

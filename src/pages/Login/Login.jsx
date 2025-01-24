@@ -36,9 +36,9 @@ const Login = () => {
         navigate("/dashboard");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         const errorCode = err.code;
-        console.log(errorCode);
+        // console.log(errorCode);
         if (errorCode === "auth/wrong-password") {
           message.error("Incorrect password. Please try again.");
         } else if (errorCode === "auth/user-not-found") {

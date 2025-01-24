@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  console.log("User form admin route", user, loading);
+  // console.log("User form admin route", user, loading);
   const { userRole, roleLoading } = useRole();
 
   if (loading || roleLoading) {

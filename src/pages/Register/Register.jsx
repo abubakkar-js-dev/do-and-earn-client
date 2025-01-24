@@ -55,21 +55,21 @@ const Register = () => {
 
     if (res.data.success) {
       const imgURL = res.data.data.url;
-      console.log(res.data);
-      console.log(imgURL);
+      // console.log(res.data);
+      // console.log(imgURL);
 
       // register user with firebase
       createUser(email, password)
         .then((result) => {
           const user = result.user;
           setUser(user);
-          console.log(user);
+          // console.log(user);
 
           // update user profile
           const updatedInfo = { displayName: name, photoURL: imgURL };
           updateUserProfile(updatedInfo)
             .then(() => {
-              console.log("Updated Profile Successfully.");
+              // console.log("Updated Profile Successfully.");
               setUser({ ...user, ...updatedInfo });
 
               // save user to the database.
@@ -82,12 +82,12 @@ const Register = () => {
                 availableCoin: bonousCoin,
               };
 
-              console.log('Successfully created new user.',newUser);
+              // console.log('Successfully created new user.',newUser);
               // save it to  db
               axiosPublic.post('/users',newUser)
               .then(res=>{
-                console.log(res);
-                console.log(res.data);
+                // console.log(res);
+                // console.log(res.data);
                 if(res.data.insertedId){
                   form.resetFields();
                   Swal.fire({
