@@ -20,11 +20,13 @@ import Withdrawals from "../pages/Dashboard/Worker/Withdrawals/Withdrawals";
 import AdminHome from "../pages/Dashboard/Admin/AdminHome/AdminHome";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import ManageTasks from "../pages/Dashboard/Admin/ManageTasks/ManageTasks";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <MainLayout />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: '/',
