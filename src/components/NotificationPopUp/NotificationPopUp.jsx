@@ -49,6 +49,7 @@ const NotificationPopUp = () => {
         <div
           className="absolute right-0 mt-2 w-80 md:w-96 bg-white shadow-lg rounded-lg border border-gray-200 z-50"
           onClick={(e) => e.stopPropagation()}
+          style={{maxHeight: "500px", overflowY: "auto"}}
         >
           <Card title="Notifications" bordered={false} className="p-2">
             {notifications.length > 0 ? (
