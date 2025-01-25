@@ -10,6 +10,7 @@ const Withdrawals = () => {
   const { user } = useAuth();
   const { userData } = useUserData();
   const axiosSecure = useAxiosSecure();
+  const [form] = Form.useForm();
 
   const [withdrawCoins, setWithdrawCoins] = useState(0);
   const [withdrawAmount, setWithdrawAmount] = useState(0);
@@ -35,6 +36,7 @@ const Withdrawals = () => {
     try {
       const response = await axiosSecure.post("/withdrawals", withdrawalData);
       if (response.data.insertedId) {
+        form.resetFields();
         message.success("Withdrawal request submitted successfully!");
       } else {
         message.error("Failed to submit withdrawal request.");
@@ -71,7 +73,7 @@ const Withdrawals = () => {
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold mb-4">Withdrawal Form</h2>
 
-        <Form layout="vertical" onFinish={handleSubmit}>
+        <Form form={form} layout="vertical" onFinish={handleSubmit}>
           {/* Coins to Withdraw */}
           <Form.Item
             label="Coins to Withdraw"
