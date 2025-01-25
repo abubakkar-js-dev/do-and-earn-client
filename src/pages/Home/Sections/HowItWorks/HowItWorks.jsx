@@ -1,5 +1,6 @@
 import { FaDollarSign, FaTasks, FaUserTie } from "react-icons/fa";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
+import { motion } from "framer-motion"; // Import Framer Motion
 
 const HowItWorks = () => {
   const howItWorks = [
@@ -23,6 +24,12 @@ const HowItWorks = () => {
     },
   ];
 
+  // Animation variants for Framer Motion
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
   return (
     <div className="py-12 bg-gray-50">
       {/* Section Title */}
@@ -31,15 +38,25 @@ const HowItWorks = () => {
         subtitle="Simple Steps to Get Things Done"
       />
 
-      {/* Steps Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-8 px-4">
         {howItWorks.map((step, index) => (
-          <div
+          <motion.div
             key={index}
             className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-shadow duration-300"
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }} 
+            custom={index} 
+            transition={{ delay: index * 0.2 }}
           >
             {/* Icon */}
-            <div className="text-4xl text-blue-500 mb-4">{step.icon}</div>
+            <motion.div
+              className="text-4xl text-blue-500 mb-4"
+              whileHover={{ scale: 1.1 }} 
+            >
+              {step.icon}
+            </motion.div>
 
             {/* Title */}
             <h3 className="text-lg font-semibold text-gray-800 mb-2">
@@ -48,7 +65,7 @@ const HowItWorks = () => {
 
             {/* Description */}
             <p className="text-gray-600 text-sm">{step.description}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

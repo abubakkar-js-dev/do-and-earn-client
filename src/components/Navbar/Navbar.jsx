@@ -1,39 +1,79 @@
-import { useState } from "react";
-import { Layout, Menu, Drawer, Button } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
+import { Layout, Menu, Drawer, Button, Dropdown, message } from "antd";
+import { MenuOutlined, UserOutlined } from "@ant-design/icons";
 import { NavLink, useLocation } from "react-router-dom";
-import './Navbar.css'
+import './Navbar.css';
+import useAuth from "../../hooks/useAuth";
+import useUserData from "../../hooks/useUserData";
+import Loading from "../Loading/Loading";
 
 const { Header } = Layout;
 
 const Navbar = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const location = useLocation();
-  const user = true;
+  const { user, logOut,setUser } = useAuth();
+  const { userData,userDataLoading,refetch } = useUserData();
+
+  useEffect(() => {
+    if (user) {
+      refetch();
+    }
+  }, [refetch, user]);
 
   const showDrawer = () => setDrawerVisible(true);
   const closeDrawer = () => setDrawerVisible(false);
 
-  const menuItems = [
+  const handleLogout = () => {
+    logOut().then(() => { 
+      message.success("Successfully Logged Out");
+      setUser(null);
+    })
+    .catch((err) => {
+      message.error("Failed to log out");
+      console.error(err);
+    })
+  };
+
+  // Common menu items
+  const loggedOutMenuItems = [
     { key: "/", label: <NavLink to="/" className="nav-link text-base">Home</NavLink> },
     { key: "/login", label: <NavLink to="/login" className="nav-link text-base">Login</NavLink> },
     { key: "/register", label: <NavLink to="/register" className="nav-link text-base">Register</NavLink> },
-    user && {key: '/dashboard',label: <NavLink to="/dashboard" className="nav-link text-base">Dashboard</NavLink>}
-  ].filter(Boolean);
+  ];
+
+  const loggedInMenuItems = [
+    { key: "/", label: <NavLink to="/" className="nav-link text-base">Home</NavLink> },
+    { key: "/dashboard", label: <NavLink to="/dashboard" className="nav-link text-base">Dashboard</NavLink> },
+  ];
+
+  const profileMenu = (
+    <Menu>
+      <Menu.Item key="coin">
+        Available Coin: <strong>{userData?.availableCoin || 0}</strong>
+      </Menu.Item>
+      <Menu.Item key="logout" onClick={handleLogout}>
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
+
+  if (userDataLoading ) return <Loading />;
 
   return (
     <Layout>
       <Header
-        className="flex justify-between items-center py-6 md:py-8 px-8  md:px-12"
+        className="flex justify-between items-center py-6 md:py-8 px-8 md:px-12"
         style={{
-          // background: "linear-gradient(to right, #3b82f6, #10b981)", 
+          background: "linear-gradient(to right, #3b82f6, #10b981)",
           color: "white",
-          // boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
         }}
       >
         {/* Logo */}
         <div className="logo font-bold text-2xl cursor-pointer transform hover:scale-110 transition">
-          <h2 style={{ fontWeight: "bold", margin: 0 }}>Do <span className="text-orange-400">&</span> Earn</h2>
+          <h2 style={{ fontWeight: "bold", margin: 0 }}>
+            Do <span className="text-orange-400">&</span> Earn
+          </h2>
         </div>
 
         {/* Desktop Menu */}
@@ -42,7 +82,7 @@ const Navbar = () => {
           theme="dark"
           mode="horizontal"
           selectedKeys={[location.pathname]} // Highlight the current route
-          items={menuItems}
+          items={user ? loggedInMenuItems : loggedOutMenuItems}
           style={{
             background: "transparent",
             border: "none",
@@ -50,6 +90,26 @@ const Navbar = () => {
             justifyContent: "flex-end",
           }}
         />
+
+        {/* Profile and Logout Button */}
+        {user && (
+          <Dropdown overlay={profileMenu} placement="bottomRight" arrow>
+            <Button
+              className="hidden md:block rounded-full bg-gradient-to-l from-blue-400 to-green-400 text-white border-none text-lg font-semibold"
+              icon={<UserOutlined />}
+            >
+              Profile
+            </Button>
+          </Dropdown>
+        )}
+
+        {/* Join Button */}
+        <Button
+          href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-abubakkar-js-dev"
+          className="hidden md:block rounded-full text-lg font-semibold bg-gradient-to-l from-blue-400 to-green-400 text-white border-none ml-4"
+        >
+          Join As Developer
+        </Button>
 
         {/* Mobile Menu Button */}
         <Button
@@ -59,28 +119,33 @@ const Navbar = () => {
           onClick={showDrawer}
         />
 
-        {/* Join Button */}
-        <Button
-            href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-abubakkar-js-dev"
-          // type="dashed"
-          className="hidden md:block rounded-full text-lg font-semibold bg-gradient-to-l from-blue-400 to-green-400 text-white border-none"
-        >
-          Join As Developer
-        </Button>
-
         {/* Mobile Drawer */}
         <Drawer
           title="Menu"
           placement="right"
           onClose={closeDrawer}
           open={drawerVisible}
-          // body.Style={{ padding: 0 }}
         >
           <Menu
             mode="vertical"
             selectedKeys={[location.pathname]} // Highlight the current route
-            items={menuItems}
+            items={user ? loggedInMenuItems : loggedOutMenuItems}
           />
+          {user && (
+            <>
+              <div className="mt-4">
+                Available Coin: <strong>{userData?.availableCoin || 0}</strong>
+              </div>
+              <Button
+                className="mt-4"
+                type="primary"
+                danger
+                onClick={logOut}
+              >
+                Logout
+              </Button>
+            </>
+          )}
         </Drawer>
       </Header>
     </Layout>

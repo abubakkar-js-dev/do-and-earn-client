@@ -1,12 +1,35 @@
 import { Form, Input, Button } from "antd";
 import { FaPaperPlane } from "react-icons/fa";
+import { motion } from "framer-motion"; // Import Framer Motion
 
 const GetInTouch = () => {
+  // Animation variants for Framer Motion
+  const formVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  };
+
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1, delay: 0.5 } },
+  };
+
   return (
     <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10 px-6 lg:px-12">
         {/* Left Card: Form */}
-        <div className="bg-white shadow-xl rounded-lg p-10 flex flex-col justify-between lg:w-1/2">
+        <motion.div
+          className="bg-white shadow-xl rounded-lg p-10 flex flex-col justify-between lg:w-1/2"
+          variants={formVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }} // Animate when 50% of the card is in view
+        >
           <h2 className="text-4xl font-extrabold text-gray-800 mb-8 leading-tight">
             Contact Our Team
           </h2>
@@ -26,7 +49,7 @@ const GetInTouch = () => {
               rules={[{ required: true, message: "Please enter your name!" }]}
             >
               <Input
-                className="h-12 border-gray-300"
+                className="h-12 border-gray-300 hover:border-blue-500 focus:border-blue-500 transition-colors"
                 placeholder="Your Full Name"
                 style={{ borderRadius: "8px" }}
               />
@@ -41,7 +64,7 @@ const GetInTouch = () => {
               ]}
             >
               <Input
-                className="h-12 border-gray-300"
+                className="h-12 border-gray-300 hover:border-blue-500 focus:border-blue-500 transition-colors"
                 placeholder="Your Email Address"
                 style={{ borderRadius: "8px" }}
               />
@@ -57,6 +80,7 @@ const GetInTouch = () => {
               <Input.TextArea
                 rows={6}
                 placeholder="Type your message here..."
+                className="hover:border-blue-500 focus:border-blue-500 transition-colors"
                 style={{ borderRadius: "8px", borderColor: "#d1d5db" }}
               />
             </Form.Item>
@@ -65,23 +89,35 @@ const GetInTouch = () => {
               <Button
                 type="primary"
                 htmlType="submit"
-                className="flex items-center justify-center gap-2 h-12 w-full text-lg font-semibold"
+                className="flex items-center justify-center gap-2 h-12 w-full text-lg font-semibold hover:bg-blue-600 transition-colors"
                 style={{ borderRadius: "8px", backgroundColor: "#2563eb" }}
               >
                 Send Message <FaPaperPlane />
               </Button>
             </Form.Item>
           </Form>
-        </div>
+        </motion.div>
 
         {/* Right Card: Image with Overlay */}
-        <div className="relative lg:w-1/2 flex-grow h-auto rounded-lg">
+        <motion.div
+          className="relative lg:w-1/2 flex-grow h-auto rounded-lg"
+          variants={imageVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }} // Animate when 50% of the card is in view
+        >
           <img
             src="https://i.ibb.co/3yj8Ldf/photo-1653669486781-7265d7824b44-q-80-w-2070-auto-format-fit-crop-ixlib-rb-4-0.jpg"
             alt="Contact Us"
             className="w-full h-full object-cover shadow-xl rounded-lg"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black bg-opacity-70 flex justify-center items-center text-white text-2xl font-semibold text-center px-6 py-4 rounded-lg">
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black bg-opacity-70 flex justify-center items-center text-white text-2xl font-semibold text-center px-6 py-4 rounded-lg"
+            variants={overlayVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             <div className="space-y-4">
               <p className="text-4xl font-bold">We&apos;re here to help!</p>
               <p className="text-lg font-light">
@@ -89,8 +125,8 @@ const GetInTouch = () => {
                 rewarding.
               </p>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );

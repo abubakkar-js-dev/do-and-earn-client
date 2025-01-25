@@ -4,7 +4,7 @@
 [Live Site](https://do-and-earn-9b707.web.app/)
 
 ### Admin Credentials
-- **Username**: `mdabubakkars182@gmail.com`  
+- **Username**: `johndoe@gmail.com`  
 - **Password**: `Ab1234@`  
 
 ---

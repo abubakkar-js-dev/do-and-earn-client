@@ -12,6 +12,7 @@ import Loading from "../../../../components/Loading/Loading";
 import { message } from "antd";
 import useUserData from "../../../../hooks/useUserData";
 import { Helmet } from "react-helmet-async";
+import moment from "moment";
 
 const AdminHome = () => {
   const axiosSecure = useAxiosSecure();
@@ -50,9 +51,22 @@ const AdminHome = () => {
       });
       // console.log(res.data);
       if (res.data.success === true) {
-        message.success("Payment status updated successfully!");
+        // post a notification
+        const notification = {
+          message: `Your withdrawal request of ${withdrawal.withdrawal_amount} has been approved and will be processed soon.`,
+          toEmail: withdrawal.worker_email,
+          actionRoute: "/dashboard/worker-home",
+          time: moment().toISOString(),
+        }
+
+        const notificationRes = await axiosSecure.post("/notifications", notification);
+        if (notificationRes.data.insertedId) {
+          // console.log("Notification saved successfully");
+          message.success("Payment status updated successfully!");
+        }
         refetchWithdrawals();
         refetch();
+
       }
     } catch (error) {
       console.error("Error updating withdrawal status:", error);

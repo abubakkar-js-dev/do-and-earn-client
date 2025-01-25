@@ -6,6 +6,7 @@ import useAuth from "../../../../hooks/useAuth";
 import Loading from "../../../../components/Loading/Loading";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import moment from "moment";
 
 const BuyerHome = () => {
   const { user } = useAuth();
@@ -34,26 +35,75 @@ const BuyerHome = () => {
     },
   });
 
-  // Approve and Reject Mutations
   const approveMutation = useMutation({
     mutationFn: async (submissionId) => {
       return await axiosSecure.patch(`/submissions/${submissionId}/approve`);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["submissions"]);
-      message.success("Submission approved successfully!");
+    onSuccess: async (_, variables) => {
+      try {
+        // Fetch the submission details
+        const { data: submission } = await axiosSecure.get(`/single-submission/${variables}`);
+  
+        // Prepare the notification
+        const newNotification = {
+          message: `You have earned $${submission.payable_amount} for the task "${submission.task_title}" from ${submission.buyer_name}`,
+          toEmail: submission.worker_email, 
+          actionRoute: "/dashboard/worker-home",
+          time: moment().toISOString(),
+        };
+  
+        // Save the notification
+        const { data: notificationResponse } = await axiosSecure.post("/notifications", newNotification);
+  
+        if (notificationResponse.insertedId) {
+          console.log("Notification saved successfully");
+          message.success("Submission approved successfully!");
+        }
+  
+        // Invalidate cache to refresh data
+        queryClient.invalidateQueries(["submissions"]);
+      } catch (error) {
+        console.error("Error during approval:", error);
+        message.error("Something went wrong. Please try again.");
+      }
     },
   });
+  
 
   const rejectMutation = useMutation({
     mutationFn: async (submissionId) => {
       return await axiosSecure.patch(`/submissions/${submissionId}/reject`);
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["submissions"]);
-      message.success("Submission rejected successfully!");
+    onSuccess: async (_, variables) => {
+      try {
+        // Fetch the submission details
+        const { data: submission } = await axiosSecure.get(`/single-submission/${variables}`);
+  
+        // Prepare the notification
+        const newNotification = {
+          message: `Your submission for the task "${submission.task_title}" has been rejected by ${submission.buyer_name}`,
+          toEmail: submission.worker_email,
+          actionRoute: "/dashboard/worker-home",
+          time: moment().toISOString(),
+        };
+  
+        // Save the notification
+        const { data: notificationResponse } = await axiosSecure.post("/notifications", newNotification);
+  
+        if (notificationResponse.insertedId) {
+          console.log("Notification saved successfully");
+          message.success("Submission rejected successfully!");
+        }
+  
+        // Invalidate cache to refresh data
+        queryClient.invalidateQueries(["submissions"]);
+      } catch (error) {
+        console.error("Error during rejection:", error);
+        message.error("Something went wrong. Please try again.");
+      }
     },
   });
+  
 
   // Loading State
   if (buyerStatsLoading || submissionsLoading) return <Loading />;

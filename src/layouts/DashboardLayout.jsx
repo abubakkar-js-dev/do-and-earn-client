@@ -1,12 +1,13 @@
 import { Avatar, Badge, Layout, Menu } from "antd";
 import { FaCoins } from "react-icons/fa";
-import { IoBarbellOutline, IoHomeOutline } from "react-icons/io5";
+import { IoHomeOutline } from "react-icons/io5";
 import { MdPayments } from "react-icons/md";
 import { TiSocialSkypeOutline, TiUserOutline } from "react-icons/ti";
 import { NavLink, Outlet } from "react-router-dom";
 import useUserData from "../hooks/useUserData";
 import logo from "../assets/images/logo-2.png";
 import { Helmet } from "react-helmet-async";
+import NotificationPopUp from "../components/NotificationPopUp/NotificationPopUp";
 
 const { Header, Content, Sider } = Layout;
 
@@ -103,9 +104,7 @@ const DashboardLayout = () => {
         />
         
         {/* Badge Icon */}
-        <Badge dot>
-          <IoBarbellOutline style={{ fontSize: "24px" }} />
-        </Badge>
+        <NotificationPopUp />
       </div>
         </Header>
 

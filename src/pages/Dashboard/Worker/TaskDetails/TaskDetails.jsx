@@ -45,7 +45,19 @@ const TaskDetails = () => {
     try {
       const res = await axiosSecure.post("/submissions", submissionData);
       if (res.data.insertedId) {
-        message.success("Submission successful!");
+        // Send a notification to the buyer
+        const notification = { 
+          message: `You have received a submission for the task "${task.task_title}" from ${user?.displayName}`,
+          toEmail: task.buyer_email,
+          actionRoute: `/dashboard/buyer-home`,
+          time: new Date().toISOString(),
+        }
+
+        const notificationRes = await axiosSecure.post("/notifications", notification);
+        if (notificationRes.data.insertedId) {
+          // console.log("Notification sent successfully");
+          message.success("Submission successful!");
+         }
         setSubmissionDetails(""); 
       }
     } catch (error) {

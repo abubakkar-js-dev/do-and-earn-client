@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import TaskCard from "../../../../components/TaskCard/TaskCard";
@@ -14,24 +15,35 @@ const PopularTask = () => {
     },
   });
 
-  // console.log(popularTasks);
-
   if (isLoading) return <Loading />;
 
   return (
-    <div className="py-10">
+    <motion.div
+      className="py-10 bg-gradient-to-b from-gray-50 to-gray-100"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
       <SectionTitle
         title="Popular Tasks"
         subtitle="Discover the most rewarding tasks and jobs to maximize your earnings today"
       />
 
       {/* Card Container */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-        {popularTasks.map((task) => (
-          <TaskCard key={task._id} task={task} />
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 md:px-8">
+        {popularTasks.map((task, index) => (
+          <motion.div
+            key={task._id}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true }}
+          >
+            <TaskCard task={task} />
+          </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
