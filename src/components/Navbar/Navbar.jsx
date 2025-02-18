@@ -5,15 +5,14 @@ import { NavLink, useLocation } from "react-router-dom";
 import './Navbar.css';
 import useAuth from "../../hooks/useAuth";
 import useUserData from "../../hooks/useUserData";
-import Loading from "../Loading/Loading";
 
 const { Header } = Layout;
 
 const Navbar = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const location = useLocation();
-  const { user, logOut,setUser } = useAuth();
-  const { userData,userDataLoading,refetch } = useUserData();
+  const { user, logOut, setUser } = useAuth();
+  const { userData, refetch } = useUserData();
 
   useEffect(() => {
     if (user) {
@@ -25,14 +24,14 @@ const Navbar = () => {
   const closeDrawer = () => setDrawerVisible(false);
 
   const handleLogout = () => {
-    logOut().then(() => { 
+    logOut().then(() => {
       message.success("Successfully Logged Out");
       setUser(null);
     })
     .catch((err) => {
       message.error("Failed to log out");
       console.error(err);
-    })
+    });
   };
 
   // Common menu items
@@ -58,44 +57,32 @@ const Navbar = () => {
     </Menu>
   );
 
-  if (userDataLoading ) return <Loading />;
+  // if (userDataLoading) return <Loading />;
 
   return (
-    <Layout>
-      <Header
-        className="flex justify-between items-center py-6 md:py-8 px-8 md:px-12"
-        style={{
-          background: "linear-gradient(to right, #3b82f6, #10b981)",
-          color: "white",
-        }}
-      >
+    <Layout className="bg-gradient-to-r from-blue-500 to-green-500 dark:bg-gradient-to-r dark:from-slate-800 dark:to-slate-900">
+      <Header className="flex justify-between items-center py-6 md:py-8 px-8 md:px-12 container bg-transparent text-white dark:text-gray-200">
         {/* Logo */}
         <div className="logo font-bold text-2xl cursor-pointer transform hover:scale-110 transition">
           <h2 style={{ fontWeight: "bold", margin: 0 }}>
-            Do <span className="text-orange-400">&</span> Earn
+            Do <span className="text-orange-400 dark:text-orange-300">&</span> Earn
           </h2>
         </div>
 
         {/* Desktop Menu */}
         <Menu
-          className="hidden md:flex"
           theme="dark"
           mode="horizontal"
-          selectedKeys={[location.pathname]} // Highlight the current route
+          selectedKeys={[location.pathname]}
           items={user ? loggedInMenuItems : loggedOutMenuItems}
-          style={{
-            background: "transparent",
-            border: "none",
-            flex: 1,
-            justifyContent: "flex-end",
-          }}
+          className="hidden md:flex bg-transparent border-none flex-1 justify-end"
         />
 
         {/* Profile and Logout Button */}
         {user && (
           <Dropdown overlay={profileMenu} placement="bottomRight" arrow>
             <Button
-              className="hidden md:block rounded-full bg-gradient-to-l from-blue-400 to-green-400 text-white border-none text-lg font-semibold"
+              className="hidden md:block rounded-full bg-gradient-to-l from-blue-400 to-green-400 text-white border-none text-lg font-semibold dark:from-gray-700 dark:to-gray-600 dark:text-gray-200"
               icon={<UserOutlined />}
             >
               Profile
@@ -106,7 +93,7 @@ const Navbar = () => {
         {/* Join Button */}
         <Button
           href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-abubakkar-js-dev"
-          className="hidden md:block rounded-full text-lg font-semibold bg-gradient-to-l from-blue-400 to-green-400 text-white border-none ml-4"
+          className="hidden md:block rounded-full text-lg font-semibold bg-gradient-to-l from-blue-400 to-green-400 text-white border-none ml-4 dark:from-gray-700 dark:to-gray-600 dark:text-gray-200"
         >
           Join As Developer
         </Button>
@@ -125,15 +112,17 @@ const Navbar = () => {
           placement="right"
           onClose={closeDrawer}
           open={drawerVisible}
+          className="dark:bg-gray-800 dark:text-gray-200"
         >
           <Menu
             mode="vertical"
-            selectedKeys={[location.pathname]} // Highlight the current route
+            selectedKeys={[location.pathname]}
             items={user ? loggedInMenuItems : loggedOutMenuItems}
+            className="dark:bg-gray-800 dark:text-gray-200"
           />
           {user && (
             <>
-              <div className="mt-4">
+              <div className="mt-4 dark:text-gray-200">
                 Available Coin: <strong>{userData?.availableCoin || 0}</strong>
               </div>
               <Button
