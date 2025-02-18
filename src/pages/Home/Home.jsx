@@ -5,6 +5,7 @@ import GetInTouch from "./Sections/GetInTouch/GetInTouch";
 import HowItWorks from "./Sections/HowItWorks/HowItWorks";
 import PopularTask from "./Sections/PopularTask/PopularTask";
 import Testimonial from "./Sections/Testimonial/Testimonial";
+import FAQSection from "./Sections/Faq/FaqSection";
 
 const Home = () => {
     return (
@@ -22,6 +23,8 @@ const Home = () => {
           <PopularTask />
           {/* How It works */}
           <HowItWorks />
+          {/* Faq */}
+          <FAQSection />  
           {/* Get touch In */}
           <GetInTouch />
         </div>

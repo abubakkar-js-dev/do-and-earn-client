@@ -61,7 +61,7 @@ const Navbar = () => {
 
   return (
     <Layout className="bg-gradient-to-r from-blue-500 to-green-500 dark:bg-gradient-to-r dark:from-slate-800 dark:to-slate-900">
-      <Header className="flex justify-between items-center py-6 md:py-8 px-8 md:px-12 container bg-transparent text-white dark:text-gray-200">
+      <Header className="w-full max-w-7xl mx-auto flex justify-between items-center py-6 md:py-8 px-8  lg:px-0  bg-transparent text-white dark:text-gray-200">
         {/* Logo */}
         <div className="logo font-bold text-2xl cursor-pointer transform hover:scale-110 transition">
           <h2 style={{ fontWeight: "bold", margin: 0 }}>

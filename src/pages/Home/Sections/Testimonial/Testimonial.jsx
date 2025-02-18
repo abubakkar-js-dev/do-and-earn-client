@@ -105,7 +105,7 @@ const Testimonial = () => {
         }}
       >
         {testimonials.map((testimonial) => (
-          <SwiperSlide key={testimonial.id}>
+          <SwiperSlide key={testimonial.id} className="flex justify-center">
             <motion.div
               className="flex flex-col items-center text-center p-8 bg-gradient-to-r from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-800 shadow-lg rounded-xl hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 50 }}
