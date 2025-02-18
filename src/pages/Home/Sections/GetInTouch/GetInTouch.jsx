@@ -20,20 +20,20 @@ const GetInTouch = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 py-16">
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:bg-gradient-to-tr dark:from-gray-800 dark:to-gray-800 py-16">
       <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10 px-6 lg:px-0 ">
         {/* Left Card: Form */}
         <motion.div
-          className="bg-white shadow-xl rounded-lg p-10 flex flex-col justify-between lg:w-1/2"
+          className="bg-white dark:border-gray-700 dark:bg-gray-900/15 border shadow-xl rounded-lg p-10 flex flex-col justify-between lg:w-1/2"
           variants={formVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }} // Animate when 50% of the card is in view
         >
-          <h2 className="text-4xl font-extrabold text-gray-800 mb-8 leading-tight">
+          <h2 className="text-4xl font-extrabold text-gray-800 dark:text-white mb-8 leading-tight">
             Contact Our Team
           </h2>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
             Got questions? Fill out the form below, and we&apos;ll respond within 24
             hours to assist you with your micro-task journey.
           </p>
@@ -44,19 +44,19 @@ const GetInTouch = () => {
             className="space-y-6"
           >
             <Form.Item
-              label={<span className="font-semibold text-gray-700">Name</span>}
+              label={<span className="font-semibold text-gray-700 dark:text-gray-200">Name</span>}
               name="name"
               rules={[{ required: true, message: "Please enter your name!" }]}
             >
               <Input
-                className="h-12 border-gray-300 hover:border-blue-500 focus:border-blue-500 transition-colors"
+                className="h-12 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-blue-500 focus:border-blue-500 transition-colors placeholder:text-gray-500"
                 placeholder="Your Full Name"
                 style={{ borderRadius: "8px" }}
               />
             </Form.Item>
 
             <Form.Item
-              label={<span className="font-semibold text-gray-700">Email</span>}
+              label={<span className="font-semibold text-gray-700 dark:text-gray-200">Email</span>}
               name="email"
               rules={[
                 { required: true, message: "Please enter your email!" },
@@ -64,14 +64,14 @@ const GetInTouch = () => {
               ]}
             >
               <Input
-                className="h-12 border-gray-300 hover:border-blue-500 focus:border-blue-500 transition-colors"
+                className="h-12 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-blue-500 focus:border-blue-500 transition-colors placeholder:text-gray-500"
                 placeholder="Your Email Address"
                 style={{ borderRadius: "8px" }}
               />
             </Form.Item>
 
             <Form.Item
-              label={<span className="font-semibold text-gray-700">Message</span>}
+              label={<span className="font-semibold text-gray-700 dark:text-gray-200">Message</span>}
               name="message"
               rules={[
                 { required: true, message: "Please enter your message!" },
@@ -80,7 +80,7 @@ const GetInTouch = () => {
               <Input.TextArea
                 rows={6}
                 placeholder="Type your message here..."
-                className="hover:border-blue-500 focus:border-blue-500 transition-colors"
+                className="bg-white dark:bg-gray-800 border-gray-300 dark:!border-gray-700 hover:border-blue-500 focus:border-blue-500 transition-colors placeholder:text-gray-500"
                 style={{ borderRadius: "8px", borderColor: "#d1d5db" }}
               />
             </Form.Item>
@@ -100,7 +100,7 @@ const GetInTouch = () => {
 
         {/* Right Card: Image with Overlay */}
         <motion.div
-          className="relative lg:w-1/2 flex-grow h-auto rounded-lg"
+          className="relative lg:w-1/2 flex-grow h-auto rounded-lg border border-gray-100 dark:border-gray-600"
           variants={imageVariants}
           initial="hidden"
           whileInView="visible"

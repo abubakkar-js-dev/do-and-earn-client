@@ -31,7 +31,7 @@ const HowItWorks = () => {
   };
 
   return (
-    <div className="py-12 bg-gray-50">
+    <div className="py-12 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/* Section Title */}
       <SectionTitle
         title="How It Works?"
@@ -42,7 +42,7 @@ const HowItWorks = () => {
         {howItWorks.map((step, index) => (
           <motion.div
             key={index}
-            className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-shadow duration-300"
+            className="flex flex-col items-center bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 text-center hover:shadow-xl dark:hover:shadow-2xl transition-shadow duration-300 dark:text-gray-200"
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
@@ -52,19 +52,21 @@ const HowItWorks = () => {
           >
             {/* Icon */}
             <motion.div
-              className="text-4xl text-blue-500 mb-4"
+              className="text-4xl text-blue-500 dark:text-blue-400 mb-4"
               whileHover={{ scale: 1.1 }} 
             >
               {step.icon}
             </motion.div>
 
             {/* Title */}
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
               {step.title}
             </h3>
 
             {/* Description */}
-            <p className="text-gray-600 text-sm">{step.description}</p>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">
+              {step.description}
+            </p>
           </motion.div>
         ))}
       </div>

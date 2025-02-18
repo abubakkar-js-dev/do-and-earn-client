@@ -27,16 +27,16 @@ const TaskCard = ({ task }) => {
             className="h-52 w-full object-cover rounded-t-lg"
           />
         }
-        className="border border-gray-200"
+        className="border border-gray-100 dark:border-gray-500 bg-white dark:bg-gray-800"
       >
         <div className="p-4 space-y-4">
-          <h2 className="text-lg font-bold text-gray-800 truncate">
+          <h2 className="text-lg font-bold text-gray-800 dark:text-white truncate">
             {task_title}
           </h2>
-          <p className="text-sm text-gray-600 line-clamp-2">
+          <p className="text-sm text-gray-600 dark:text-gray-200 line-clamp-2">
             {task_detail}
           </p>
-          <div className="text-sm text-gray-600">
+          <div className="text-sm text-gray-600 dark:text-gray-300">
             <p>
               <span className="font-medium">Workers Needed:</span> {" "}
               {required_workers}

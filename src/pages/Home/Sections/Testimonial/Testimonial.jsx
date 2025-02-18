@@ -107,7 +107,7 @@ const Testimonial = () => {
         {testimonials.map((testimonial) => (
           <SwiperSlide key={testimonial.id}>
             <motion.div
-              className="flex flex-col items-center text-center p-8 bg-gradient-to-r from-blue-50 to-green-50 shadow-lg rounded-xl hover:shadow-2xl transition-all duration-300"
+              className="flex flex-col items-center text-center p-8 bg-gradient-to-r from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-800 shadow-lg rounded-xl hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
@@ -119,12 +119,12 @@ const Testimonial = () => {
                 className="w-24 h-24 rounded-full mb-4 border-4 border-blue-500 object-cover hover:scale-105 transition-transform duration-300"
                 whileHover={{ scale: 1.1 }}
               />
-              <h3 className="text-xl font-bold text-gray-800">{testimonial.name}</h3>
-              <p className="text-sm text-gray-500 mb-4">{testimonial.location}</p>
-              <p className="mt-2 text-gray-600 text-sm italic">
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">{testimonial.name}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-300 mb-4">{testimonial.location}</p>
+              <p className="mt-2 text-gray-600 dark:text-gray-100 text-sm italic">
                 &ldquo;{testimonial.feedback}&rdquo;
               </p>
-              <div className="mt-4 flex justify-center gap-1">
+              <div className="mt-4 flex justify-center gap-1 ">
                 {renderStars(testimonial.rating)}
               </div>
             </motion.div>

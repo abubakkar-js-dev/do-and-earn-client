@@ -28,7 +28,7 @@ const BestWorkers = () => {
 
   return (
     <motion.div
-      className="bg-white -mt-12 py-10 max-w-7xl mx-auto"
+      className="bg-white dark:bg-gray-900 -mt-12 py-10 max-w-7xl mx-auto"
       initial="hidden"
       animate="visible"
       variants={containerVariants}

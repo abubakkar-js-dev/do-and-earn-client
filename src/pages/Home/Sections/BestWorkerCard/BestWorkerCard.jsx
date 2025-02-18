@@ -29,8 +29,9 @@ const BestWorkerCard = ({ worker }) => {
           borderRadius: "16px",
           boxShadow: "0 6px 15px rgba(0, 0, 0, 0.1)",
           overflow: "hidden",
-          background: "linear-gradient(135deg, #e0f7fa, #ffffff)",
+          // background: "linear-gradient(135deg, #e0f7fa, #ffffff)",
         }}
+        className="bg-gradient-to-br from-[#e0f7fa] to-[#ffffff] dark:from-gray-900 dark:to-gray-800 dark:border-gray-500"
         cover={
           <div className="flex justify-center items-center mt-4">
             <motion.img
@@ -45,7 +46,7 @@ const BestWorkerCard = ({ worker }) => {
         <Meta
           className="text-center mt-4"
           title={
-            <p className="text-2xl font-bold text-gray-800">
+            <p className="text-2xl font-bold text-gray-800 dark:text-white">
               {name}
             </p>
           }
