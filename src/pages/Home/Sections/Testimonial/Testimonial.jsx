@@ -97,7 +97,7 @@ const Testimonial = () => {
           disableOnInteraction: false,
         }}
         modules={[Pagination, Autoplay]}
-        className="w-full max-w-6xl mx-auto"
+        className="w-full max-w-7xl mx-auto"
         breakpoints={{
           640: { slidesPerView: 1 },
           768: { slidesPerView: 2 },

@@ -38,7 +38,7 @@ const HowItWorks = () => {
         subtitle="Simple Steps to Get Things Done"
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-8 px-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mt-8 px-4">
         {howItWorks.map((step, index) => (
           <motion.div
             key={index}
