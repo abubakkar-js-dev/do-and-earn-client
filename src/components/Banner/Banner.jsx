@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import slideImg1 from "../../assets/images/slides/slide1.webp";
 import slideImg2 from "../../assets/images/slides/slide2.jpg";
 import slideImg3 from "../../assets/images/slides/slide3.webp";
@@ -33,80 +34,92 @@ const Banner = () => {
     },
   ];
 
-  // Framer motion variants
+  // Framer Motion Variants
   const overlayVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.0, ease: "easeOut" } },
   };
 
   const buttonVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { delay: 0.4, duration: 0.5 } },
+    visible: { opacity: 1, scale: 1, transition: { delay: 0.3, duration: 0.5 } },
   };
 
   return (
-    <Swiper
-      spaceBetween={30}
-      centeredSlides={true}
-      autoplay={{
-        delay: 3000,
-        disableOnInteraction: false,
-      }}
-      pagination={{
-        clickable: true,
-      }}
-      navigation={true}
-      modules={[Autoplay, Pagination, Navigation]}
-      className="mySwiper h-[720px]"
-    >
-      {sliderData.map((slide, index) => (
-        <SwiperSlide key={index}>
-          <div className="relative">
-            {/* Background Image */}
-            <img
-              src={slide.img}
-              alt={slide.title}
-              className="w-full h-[720px] object-cover"
-            />
-            {/* Overlay */}
-            <motion.div
-              className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white p-6"
-              initial="hidden"
-              animate="visible"
-              variants={overlayVariants}
-            >
-              <motion.h2
-                className="text-3xl md:text-5xl font-bold mb-4"
+    <div className="relative w-full">
+      <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        pagination={{ clickable: true }}
+        navigation={{ nextEl: ".custom-next", prevEl: ".custom-prev" }}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper h-[600px] md:h-[720px]"
+      >
+        {sliderData.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <div className="relative">
+              {/* Background Image */}
+              <img
+                src={slide.img}
+                alt={slide.title}
+                className="w-full h-[600px] md:h-[720px] object-cover"
+              />
+              {/* Overlay */}
+              <motion.div
+                className="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-center text-white p-6"
+                initial="hidden"
+                animate="visible"
                 variants={overlayVariants}
               >
-                {slide.title}
-              </motion.h2>
-              <motion.p
-                className="text-lg md:text-xl mb-6"
-                variants={overlayVariants}
-              >
-                {slide.description}
-              </motion.p>
-              {/* Buttons */}
-              <div className="flex gap-4">
-                <motion.button
-                  className="bg-gradient-to-r from-green-500 to-blue-500 text-white py-2 px-6 rounded"
-                  variants={buttonVariants}
+                <motion.h2
+                  className="text-3xl md:text-5xl font-bold mb-4 text-blue-400 dark:text-blue-500"
+                  variants={overlayVariants}
                 >
-                  Get Started
-                </motion.button>
-                <motion.button
-                  className="bg-transparent border-2 hover:bg-black hover:border-black transition text-white py-2 px-6 rounded"
-                  variants={buttonVariants}
+                  {slide.title}
+                </motion.h2>
+                <motion.p
+                  className="text-lg md:text-xl mb-6 text-gray-200 dark:text-gray-300"
+                  variants={overlayVariants}
                 >
-                  Learn More
-                </motion.button>
-              </div>
-            </motion.div>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+                  {slide.description}
+                </motion.p>
+                {/* Buttons */}
+                <div className="flex gap-4">
+                  <motion.button
+                    className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded transition"
+                    variants={buttonVariants}
+                  >
+                    Get Started
+                  </motion.button>
+                  <motion.button
+                    className="border-2 border-white hover:bg-white hover:text-gray-900 transition text-white py-2 px-6 rounded"
+                    variants={buttonVariants}
+                  >
+                    Learn More
+                  </motion.button>
+                </div>
+              </motion.div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Custom Navigation Buttons */}
+      <button className="custom-prev absolute left-4 top-1/2 -translate-y-1/2 
+        bg-white text-gray-800 dark:bg-gray-800 dark:text-white 
+        p-3 rounded-full shadow-md hover:bg-blue-500 dark:hover:bg-blue-400
+        transition z-10">
+        <FaArrowLeft className="w-6 h-6" />
+      </button>
+
+      <button className="custom-next absolute right-4 top-1/2 -translate-y-1/2 
+        bg-white text-gray-800 dark:bg-gray-800 dark:text-white 
+        p-3 rounded-full shadow-md hover:bg-blue-500 dark:hover:bg-blue-400
+        transition z-10">
+        <FaArrowRight className="w-6 h-6" />
+      </button>
+    </div>
   );
 };
 
