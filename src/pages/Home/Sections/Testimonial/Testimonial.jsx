@@ -82,7 +82,7 @@ const renderStars = (rating) => {
 
 const Testimonial = () => {
   return (
-    <section className="my-12">
+    <section className="my-12 mb-16 md:mb-20 lg:mb-24">
       <SectionTitle
         title="Testimonials That Inspire"
         subtitle="Your Path to Success Starts Here"

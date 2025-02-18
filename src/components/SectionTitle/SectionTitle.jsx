@@ -21,13 +21,13 @@ const SectionTitle = ({ title, subtitle = "" }) => {
         animate="visible"
         variants={titleVariants}
       >
-        <h2 className="text-3xl font-extrabold text-blue-400 tracking-wide">
+        <h2 className="text-3xl font-extrabold text-blue-400 dark:text-blue-300 tracking-wide">
           {title}
         </h2>
       </motion.div>
       {subtitle && (
         <motion.p
-          className="text-gray-600 text-base mt-4 font-medium"
+          className="text-gray-600 dark:text-gray-300 text-base mt-4 font-medium"
           initial="hidden"
           animate="visible"
           variants={subtitleVariants}
@@ -41,7 +41,7 @@ const SectionTitle = ({ title, subtitle = "" }) => {
 
 SectionTitle.propTypes = {
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
 };
 
 export default SectionTitle;

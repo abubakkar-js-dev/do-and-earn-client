@@ -19,7 +19,7 @@ const PopularTask = () => {
 
   return (
     <motion.div
-      className="py-10 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-800/50"
+      className="py-10 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-800/50 pb-16 md:pb-20 lg:pb-24"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
