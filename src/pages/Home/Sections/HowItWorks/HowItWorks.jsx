@@ -31,7 +31,7 @@ const HowItWorks = () => {
   };
 
   return (
-    <div className="py-12 bg-white dark:bg-gray-900 transition-colors duration-300 mb-6 md:mb-10 lg:mb-12">
+    <div id="howItWorks" className="py-12 bg-white dark:bg-gray-900 transition-colors duration-300 mb-6 md:mb-10 lg:mb-12">
       {/* Section Title */}
       <SectionTitle
         title="How It Works?"

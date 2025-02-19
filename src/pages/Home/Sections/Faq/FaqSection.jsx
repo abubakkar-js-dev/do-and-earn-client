@@ -54,7 +54,7 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="py-16 px-4 bg-gray-50 dark:bg-gray-900">
+    <section id="faq" className="py-16 px-4 bg-gray-50 dark:bg-gray-900">
       <SectionTitle title="Frequently Asked Questions" subtitle="Have questions? We've got answers to help you get started." />
 
       <div className="mt-10 max-w-7xl mx-auto">

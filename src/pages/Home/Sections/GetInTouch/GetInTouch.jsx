@@ -20,7 +20,7 @@ const GetInTouch = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:bg-gradient-to-tr dark:from-gray-800 dark:to-gray-800 py-20">
+    <div id="contact" className="bg-gradient-to-r from-blue-50 to-blue-100 dark:bg-gradient-to-tr dark:from-gray-800 dark:to-gray-800 py-20">
       <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-10 px-6 lg:px-0 ">
         {/* Left Card: Form */}
         <motion.div

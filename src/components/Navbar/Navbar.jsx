@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Layout, Menu, Drawer, Button, Dropdown, message } from "antd";
 import { MenuOutlined, UserOutlined } from "@ant-design/icons";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import './Navbar.css';
 import useAuth from "../../hooks/useAuth";
 import useUserData from "../../hooks/useUserData";
+import { IoMdClose } from "react-icons/io";
 
 const { Header } = Layout;
 
@@ -36,7 +37,7 @@ const Navbar = () => {
 
   // Common menu items
   const loggedOutMenuItems = [
-    { key: "/", label: <NavLink to="/" className="nav-link text-base">Home</NavLink> },
+    { key: "/", label: <NavLink to="/" className={`nav-link text-base`}>Home</NavLink> },
     { key: "/login", label: <NavLink to="/login" className="nav-link text-base">Login</NavLink> },
     { key: "/register", label: <NavLink to="/register" className="nav-link text-base">Register</NavLink> },
     {key: "/about-us", label: <NavLink to="/about-us" className="nav-link text-base">About Us</NavLink>},
@@ -44,7 +45,7 @@ const Navbar = () => {
   ];
 
   const loggedInMenuItems = [
-    { key: "/", label: <NavLink to="/" className="nav-link text-base">Home</NavLink> },
+    { key: "/", label: <NavLink to="/" className="nav-link text-base ">Home</NavLink> },
     { key: "/all-tasks", label: <NavLink to="/all-tasks" className="nav-link text-base">All Tasks</NavLink> },
     { key: "/dashboard", label: <NavLink to="/dashboard" className="nav-link text-base">Dashboard</NavLink> },
     {key: "/about-us", label: <NavLink to="/about-us" className="nav-link text-base">About Us</NavLink>},
@@ -54,6 +55,9 @@ const Navbar = () => {
     <Menu>
       <Menu.Item key="coin">
         Available Coin: <strong>{userData?.availableCoin || 0}</strong>
+      </Menu.Item>
+      <Menu.Item key="profile">
+      <Link to='/dashboard/my-profile'>My Profile</Link>
       </Menu.Item>
       <Menu.Item key="logout" onClick={handleLogout}>
         Logout
@@ -86,7 +90,7 @@ const Navbar = () => {
         {user && (
           <Dropdown overlay={profileMenu} placement="bottomRight" arrow>
             <Button
-              className="hidden md:block rounded-full bg-gradient-to-l from-blue-400 to-green-400 text-white border-none text-lg font-semibold dark:from-gray-700 dark:to-gray-600 dark:text-gray-200"
+              className="hidden lg:block rounded-full bg-gradient-to-l from-blue-400 to-green-400 text-white border-none text-lg font-semibold dark:from-gray-700 dark:to-gray-600 dark:text-gray-200"
               icon={<UserOutlined />}
             >
               Profile
@@ -115,14 +119,15 @@ const Navbar = () => {
           title="Menu"
           placement="right"
           onClose={closeDrawer}
+          closeIcon={<IoMdClose className="text-gray-700 dark:text-gray-100 font-bold text-xl" />}
           open={drawerVisible}
-          className="dark:bg-gray-800 dark:text-gray-200"
+          className="bg-white dark:!bg-gray-800 dark:!text-gray-200"
         >
           <Menu
             mode="vertical"
             selectedKeys={[location.pathname]}
             items={user ? loggedInMenuItems : loggedOutMenuItems}
-            className="dark:bg-gray-800 dark:text-gray-200"
+            className="dark:bg-gray-800 dark:!text-gray-200"
           />
           {user && (
             <>

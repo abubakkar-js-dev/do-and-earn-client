@@ -1,10 +1,14 @@
 import { Card } from "antd";
 import { motion } from "framer-motion";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
+import { Helmet } from "react-helmet-async";
 
 const AboutUs = () => {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 py-12 px-4 md:px-12">
+        <Helmet>
+            <title>About Us | TaskBros</title>
+        </Helmet>
       <SectionTitle title="About Us" subtitle="Learn more about our messions" />
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">

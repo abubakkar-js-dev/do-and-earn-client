@@ -27,17 +27,17 @@ const Footer = () => {
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium space-y-2">
                   <li>
-                    <a href="#" className="hover:underline">
+                    <Link to="/about-us" className="hover:underline">
                       Who We Are
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:underline">
+                    <Link to="/about-us" className="hover:underline">
                       Our Mission
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:underline">
+                    <a href="#contact" className="hover:underline">
                       Contact Us
                     </a>
                   </li>
@@ -54,12 +54,12 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:underline">
+                    <a href="#howItWorks" className="hover:underline">
                       How It Works
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:underline">
+                    <a href="#faq" className="hover:underline">
                       FAQ
                     </a>
                   </li>
@@ -71,19 +71,19 @@ const Footer = () => {
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium space-y-2">
                   <li>
-                    <a href="#" className="hover:underline">
+                    <Link to="/all-tasks" className="hover:underline">
                       Task Categories
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:underline">
+                    <Link to="/dashboard" className="hover:underline">
                       Submit a Task
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="hover:underline">
+                    <Link to="/all-tasks" className="hover:underline">
                       Hire Freelancers
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
