@@ -3,11 +3,12 @@ import { FaCoins } from "react-icons/fa";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdPayments } from "react-icons/md";
 import { TiSocialSkypeOutline, TiUserOutline } from "react-icons/ti";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import useUserData from "../hooks/useUserData";
 import logo from "../assets/images/logo-2.png";
 import { Helmet } from "react-helmet-async";
 import NotificationPopUp from "../components/NotificationPopUp/NotificationPopUp";
+import { CgProfile } from "react-icons/cg";
 
 const { Header, Content, Sider } = Layout;
 
@@ -30,6 +31,7 @@ const DashboardLayout = () => {
       { key: "2", label: <NavLink to="/dashboard/task-list">Task List</NavLink>, icon: <TiSocialSkypeOutline /> },
       { key: "3", label:  <NavLink to="/dashboard/my-submissions">My Submissions</NavLink> , icon: <TiUserOutline /> },
       { key: "4", label: <NavLink to="/dashboard/withdrawals">Withdrawals</NavLink>, icon: <FaCoins /> },
+      { key: "5", label: <NavLink to="/dashboard/my-profile">My Profile</NavLink>, icon: <CgProfile /> },
     ],
     Buyer: [
       { key: "1", label: <NavLink to="/dashboard/buyer-home">Home</NavLink>, icon: <IoHomeOutline /> },
@@ -37,11 +39,14 @@ const DashboardLayout = () => {
       { key: "3", label: <NavLink to="/dashboard/my-tasks">My Tasks</NavLink>, icon: <TiUserOutline /> },
       { key: "4", label: <NavLink to="/dashboard/purchase-coin">Purchase Coin</NavLink>, icon: <FaCoins /> },
       { key: "5", label: <NavLink to="/dashboard/payment-history">Payment History</NavLink>, icon: <MdPayments /> },
+      { key: "6", label: <NavLink to="/dashboard/my-profile">My Profile</NavLink>, icon: <CgProfile /> },
     ],
     Admin: [
       { key: "1", label: <NavLink to="/dashboard/admin-home">Home</NavLink>, icon: <IoHomeOutline /> },
       { key: "2", label: <NavLink to="/dashboard/manage-users">Manage Users</NavLink>, icon: <TiUserOutline /> },
       { key: "3", label: <NavLink to="/dashboard/manage-tasks">Manage Tasks</NavLink>, icon: <TiSocialSkypeOutline /> },
+      { key: "4", label: <NavLink to="/dashboard/my-profile">My Profile</NavLink>, icon: <CgProfile /> },
+
     ],
   };
 
@@ -97,11 +102,14 @@ const DashboardLayout = () => {
         </span>
         
         {/* Avatar with profile picture fallback */}
-        <Avatar
+          <Link to="/dashboard/my-profile">
+          <Avatar
+          
           icon={!userData?.profilePicture ? <TiUserOutline /> : null}
           src={userData?.profilePicture || null}
           size={40} 
         />
+          </Link>
         
         {/* Badge Icon */}
         <NotificationPopUp />

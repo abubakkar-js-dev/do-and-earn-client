@@ -23,6 +23,7 @@ import ManageTasks from "../pages/Dashboard/Admin/ManageTasks/ManageTasks";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import AllTasks from "../pages/AllTasks/AllTasks";
 import AboutUs from "../pages/AboutUs/AboutUs";
+import MyProfile from "../pages/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
     {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       path: '/dashboard',
       element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
       children: [
+        {
+          path: 'my-profile',
+          element: <MyProfile />
+        },
         // for buyer
         {
           path: 'buyer-home',
