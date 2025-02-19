@@ -1,6 +1,7 @@
 import { Button, Card } from "antd";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const TaskCard = ({ task }) => {
   const {
@@ -36,7 +37,7 @@ const TaskCard = ({ task }) => {
           <p className="text-sm text-gray-600 dark:text-gray-200 line-clamp-2">
             {task_detail}
           </p>
-          <div className="text-sm text-gray-600 dark:text-gray-300">
+          <div className="text-sm text-gray-600 dark:text-gray-300 pb-4">
             <p>
               <span className="font-medium">Workers Needed:</span> {" "}
               {required_workers}
@@ -49,7 +50,8 @@ const TaskCard = ({ task }) => {
               {new Date(completion_date).toLocaleDateString()}
             </p>
           </div>
-          <Button
+        <Link to={`/all-tasks/${task._id}`}>
+        <Button
             type="primary"
             className="relative group overflow-hidden border-none px-6 py-3 font-semibold 
                 text-white bg-blue-500 hover:bg-green-400 transition-all duration-300
@@ -59,6 +61,7 @@ const TaskCard = ({ task }) => {
             <span className="absolute inset-0 w-0 bg-green-400 dark:bg-green-500 transition-all duration-300 group-hover:w-full"></span>
             <span className="relative z-10">View More</span>
         </Button>
+        </Link>
         </div>
       </Card>
     </motion.div>

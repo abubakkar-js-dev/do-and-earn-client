@@ -24,6 +24,7 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 import AllTasks from "../pages/AllTasks/AllTasks";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import MyProfile from "../pages/MyProfile/MyProfile";
+import AnotherTaskDetails from "../pages/AnotherTaskDetails/AnotherTaskDetails";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
         {
           path: 'about-us',
           element: <AboutUs />
+        },
+        {
+          path: '/all-tasks/:id',
+          element: <PrivateRoute><AnotherTaskDetails /></PrivateRoute>
         }
       ]
     },
