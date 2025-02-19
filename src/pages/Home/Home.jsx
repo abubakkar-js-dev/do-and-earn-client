@@ -6,6 +6,8 @@ import HowItWorks from "./Sections/HowItWorks/HowItWorks";
 import PopularTask from "./Sections/PopularTask/PopularTask";
 import Testimonial from "./Sections/Testimonial/Testimonial";
 import FAQSection from "./Sections/Faq/FaqSection";
+import FooterBanner from "./Sections/FooterBanner/FooterBanner";
+
 
 const Home = () => {
     return (
@@ -23,6 +25,8 @@ const Home = () => {
           <PopularTask />
           {/* How It works */}
           <HowItWorks />
+          {/* Task Platform Banner */}
+          <FooterBanner />
           {/* Faq */}
           <FAQSection />  
           {/* Get touch In */}
