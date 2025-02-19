@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import { Button, Card } from "antd";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 
@@ -49,6 +49,16 @@ const TaskCard = ({ task }) => {
               {new Date(completion_date).toLocaleDateString()}
             </p>
           </div>
+          <Button
+            type="primary"
+            className="relative group overflow-hidden border-none px-6 py-3 font-semibold 
+                text-white bg-blue-500 hover:bg-green-400 transition-all duration-300
+                dark:bg-blue-600 dark:hover:bg-green-400 dark:text-gray-100 
+                rounded-lg shadow-lg shadow-blue-300/50 dark:shadow-green-300/20 text-base w-full mx-auto"
+        >
+            <span className="absolute inset-0 w-0 bg-green-400 dark:bg-green-500 transition-all duration-300 group-hover:w-full"></span>
+            <span className="relative z-10">View More</span>
+        </Button>
         </div>
       </Card>
     </motion.div>

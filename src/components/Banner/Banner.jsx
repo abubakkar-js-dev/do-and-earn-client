@@ -12,8 +12,10 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 // Import framer-motion
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
   const sliderData = [
     {
       img: slideImg1,
@@ -87,12 +89,14 @@ const Banner = () => {
                 {/* Buttons */}
                 <div className="flex gap-4">
                   <motion.button
+                    onClick={()=> navigate('/all-tasks')}
                     className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded transition"
                     variants={buttonVariants}
                   >
                     Get Started
                   </motion.button>
                   <motion.button
+                    onClick={()=> navigate('/about-us')}
                     className="border-2 border-white hover:bg-white hover:text-gray-900 transition text-white py-2 px-6 rounded"
                     variants={buttonVariants}
                   >

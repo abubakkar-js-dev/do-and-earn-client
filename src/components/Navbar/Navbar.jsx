@@ -39,11 +39,15 @@ const Navbar = () => {
     { key: "/", label: <NavLink to="/" className="nav-link text-base">Home</NavLink> },
     { key: "/login", label: <NavLink to="/login" className="nav-link text-base">Login</NavLink> },
     { key: "/register", label: <NavLink to="/register" className="nav-link text-base">Register</NavLink> },
+    {key: "/about-us", label: <NavLink to="/about-us" className="nav-link text-base">About Us</NavLink>},
+
   ];
 
   const loggedInMenuItems = [
     { key: "/", label: <NavLink to="/" className="nav-link text-base">Home</NavLink> },
+    { key: "/all-tasks", label: <NavLink to="/all-tasks" className="nav-link text-base">All Tasks</NavLink> },
     { key: "/dashboard", label: <NavLink to="/dashboard" className="nav-link text-base">Dashboard</NavLink> },
+    {key: "/about-us", label: <NavLink to="/about-us" className="nav-link text-base">About Us</NavLink>},
   ];
 
   const profileMenu = (

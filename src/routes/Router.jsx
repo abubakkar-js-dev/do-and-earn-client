@@ -21,6 +21,8 @@ import AdminHome from "../pages/Dashboard/Admin/AdminHome/AdminHome";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import ManageTasks from "../pages/Dashboard/Admin/ManageTasks/ManageTasks";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
+import AllTasks from "../pages/AllTasks/AllTasks";
+import AboutUs from "../pages/AboutUs/AboutUs";
 
 const router = createBrowserRouter([
     {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
         {
           path: 'register',
           element: <Register />
+        },
+        {
+          path: 'all-tasks',
+          element: <PrivateRoute><AllTasks /></PrivateRoute>
+        },
+        {
+          path: 'about-us',
+          element: <AboutUs />
         }
       ]
     },
